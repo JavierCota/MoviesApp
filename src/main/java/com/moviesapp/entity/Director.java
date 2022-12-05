@@ -8,14 +8,16 @@ public class Director {
     private Date birthDate;
     private String nationality;
     private String activeYears;
-    private String education;
+    private String favoriteGenre;
+    private Integer directorID;
 
-    public Director(String directorName, Date birthDate, String nationality, String activeYears, String education) {
+    public Director(String directorName, Date birthDate, String nationality, String activeYears, String favoriteGenre, Integer directorID) {
         this.directorName = directorName;
         this.birthDate = birthDate;
         this.nationality = nationality;
         this.activeYears = activeYears;
-        this.education = education;
+        this.favoriteGenre = favoriteGenre;
+        this.directorID = directorID;
     }
 
     public String getDirectorName() {
@@ -50,12 +52,20 @@ public class Director {
         this.activeYears = activeYears;
     }
 
-    public String getEducation() {
-        return education;
+    public String getFavoriteGenre() {
+        return favoriteGenre;
     }
 
-    public void setEducation(String education) {
-        this.education = education;
+    public void setFavoriteGenre(String education) {
+        this.favoriteGenre = education;
+    }
+
+    public Integer getDirectorID() {
+        return directorID;
+    }
+
+    public void setDirectorID(Integer directorID) {
+        this.directorID = directorID;
     }
 
     @Override
@@ -63,12 +73,14 @@ public class Director {
         if (this == o) return true;
         if (!(o instanceof Director)) return false;
         Director director = (Director) o;
-        return directorName.equals(director.directorName) && birthDate.equals(director.birthDate) && Objects.equals(nationality, director.nationality) && Objects.equals(activeYears, director.activeYears) && Objects.equals(education, director.education);
+        return directorName.equals(director.directorName) && Objects.equals(birthDate, director.birthDate) && Objects.equals(nationality, director.nationality) && Objects.equals(activeYears, director.activeYears) && Objects.equals(favoriteGenre, director.favoriteGenre) && directorID.equals(director.directorID);
     }
+
     @Override
     public int hashCode() {
-        return Objects.hash(directorName, birthDate, nationality, activeYears, education);
+        return Objects.hash(directorName, birthDate, nationality, activeYears, favoriteGenre, directorID);
     }
+
     @Override
     public String toString() {
         return "Director{" +
@@ -76,7 +88,8 @@ public class Director {
                 ", birthDate=" + birthDate +
                 ", nationality='" + nationality + '\'' +
                 ", activeYears='" + activeYears + '\'' +
-                ", education='" + education + '\'' +
+                ", favoriteGenre='" + favoriteGenre + '\'' +
+                ", directorID=" + directorID +
                 '}';
     }
 }
