@@ -1,4 +1,4 @@
-package com.moviesapp.entity;
+package com.moviesapp.model.entity;
 
 import java.util.Date;
 import java.util.List;
