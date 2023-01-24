@@ -5,16 +5,37 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainView{
-    private JButton button1;
+    private JButton registerButton;
     private JLabel label1;
     private JPanel panel1;
-    private JTextField descriptionIn;
-    private JTextField releaseDateIn;
-    private JTextField movieNameIn;
-    private JTextField genreIn;
-    private JTextField durationIn;
-    private JTextField classificationIn;
-    private JPanel mainPanel;
+    private JTextField descriptionReg;
+    private JTextField releaseDateReg;
+    private JTextField movieNameReg;
+    private JTextField genreReg;
+    private JTextField durationReg;
+    private JTextField classificationReg;
+    private JPanel registerPanel;
+    private JTabbedPane mainPanel;
+    private JTextField movieNameSearch;
+    private JTextField genreSearch;
+    private JButton searchButton;
+    private JTextField directorNameIn;
+    private JTextField birthDateIn;
+    private JTextField nationalityIn;
+    private JTextField activeYearsIn;
+    private JTextField favoriteGenreIn;
+    private JPanel searchPanel;
+    private JPanel directorRSPanel;
+    private JButton registerDirButton;
+    private JButton searchDirButton;
+    private JTextField studioNameIn;
+    private JTextField studioIndustryIn;
+    private JTextField studioFoundationIn;
+    private JTextField studioFounderIn;
+    private JTextField studioHQIn;
+    private JPanel studioRSPanel;
+    private JButton searchStudioButton;
+    private JButton registerStudioButton;
 
     public MainView() {
 
@@ -24,10 +45,10 @@ public class MainView{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
 
-        button1.addActionListener(new ActionListener() {
+        registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                label1.setText("Test button1");
+                label1.setText("Test registerButton");
             }
         });
     }
