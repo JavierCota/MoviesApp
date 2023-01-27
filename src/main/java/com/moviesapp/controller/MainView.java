@@ -6,6 +6,7 @@ import com.moviesapp.model.entity.crud.CRUDDirector;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 
 public class MainView{
     private JButton registerButton;
@@ -19,28 +20,25 @@ public class MainView{
     private JTextField classificationReg;
     private JPanel registerPanel;
     private JTabbedPane mainPanel;
-    private JTextField movieNameSearch;
-    private JTextField genreSearch;
+    private JTextField nameSearch;
     private JButton searchButton;
     private JTextField directorNameIn;
     private JTextField birthDateIn;
-    private JTextField nationalityIn;
+    private JComboBox nationalityIn;
     private JTextField activeYearsIn;
     private JTextField favoriteGenreIn;
     private JPanel searchPanel;
     private JPanel directorRSPanel;
     private JButton registerDirButton;
-    private JButton searchDirButton;
     private JTextField studioNameIn;
     private JTextField studioIndustryIn;
     private JTextField studioFoundationIn;
     private JTextField studioFounderIn;
     private JTextField studioHQIn;
     private JPanel studioRSPanel;
-    private JButton searchStudioButton;
     private JButton registerStudioButton;
     private JTextField directorIDIn;
-    private JTextField studioIDIn;
+    private JComboBox searchSelection;
     private CRUDDirector crudDirector;
 
     public MainView() {
@@ -56,16 +54,30 @@ public class MainView{
             public void actionPerformed(ActionEvent e) {
                 java.sql.Date sqlDate = java.sql.Date.valueOf(birthDateIn.getText());
                 Director newDirector = new Director(
-                        directorNameIn.getText(), sqlDate, nationalityIn.getText(),activeYearsIn.getText(),favoriteGenreIn.getText(), Integer.parseInt(directorIDIn.getText()));
+                        directorNameIn.getText(), sqlDate, (String)nationalityIn.getSelectedItem(),activeYearsIn.getText(),favoriteGenreIn.getText(), Integer.parseInt(directorIDIn.getText()));
                 System.out.println(newDirector);
                 directorNameIn.setText("");
                 birthDateIn.setText("");
-                nationalityIn.setText("");
+                nationalityIn.setSelectedIndex(-1);
                 activeYearsIn.setText("");
                 favoriteGenreIn.setText("");
                 directorIDIn.setText("");
-                crudDirector.createDirector(newDirector);
+                //crudDirector.createDirector(newDirector);
             }
         });
+        searchSelection.addItem("Movie");
+        searchSelection.addItem("Director");
+        searchSelection.addItem("Studio");
+        searchSelection.setSelectedIndex(-1);
+
+
+        String[] countries = Locale.getISOCountries();
+        for(int i = 0; i < countries.length; i++){
+            String country = countries[i];
+            Locale locale = new Locale("en",country);
+            String countryName = locale.getDisplayCountry();
+            nationalityIn.addItem(countryName);
+        }
+        nationalityIn.setSelectedIndex(-1);
     }
 }
