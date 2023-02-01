@@ -46,6 +46,7 @@ public class MainView{
         JFrame frame = new JFrame("MovieApp");
         frame.setContentPane(mainPanel);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
 
