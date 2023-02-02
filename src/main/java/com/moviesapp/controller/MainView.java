@@ -1,7 +1,7 @@
 package com.moviesapp.controller;
 
-import com.moviesapp.model.entity.Director;
-import com.moviesapp.model.entity.crud.CRUDDirector;
+import com.moviesapp.model.internal.Director;
+import com.moviesapp.model.crud.CRUDDirector;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -37,9 +37,8 @@ public class MainView{
     private JTextField studioHQIn;
     private JPanel studioRSPanel;
     private JButton registerStudioButton;
-    private JTextField directorIDIn;
     private JComboBox searchSelection;
-    private CRUDDirector crudDirector;
+    private CRUDDirector crudDirector = new CRUDDirector();
 
     public MainView() {
 
@@ -55,15 +54,15 @@ public class MainView{
             public void actionPerformed(ActionEvent e) {
                 java.sql.Date sqlDate = java.sql.Date.valueOf(birthDateIn.getText());
                 Director newDirector = new Director(
-                        directorNameIn.getText(), sqlDate, (String)nationalityIn.getSelectedItem(),activeYearsIn.getText(),favoriteGenreIn.getText(), Integer.parseInt(directorIDIn.getText()));
+                        directorNameIn.getText(), sqlDate, (String)nationalityIn.getSelectedItem(),activeYearsIn.getText(),favoriteGenreIn.getText());
                 System.out.println(newDirector);
                 directorNameIn.setText("");
                 birthDateIn.setText("");
                 nationalityIn.setSelectedIndex(-1);
                 activeYearsIn.setText("");
                 favoriteGenreIn.setText("");
-                directorIDIn.setText("");
-                //crudDirector.createDirector(newDirector);
+                //directorIDIn.setText("");
+                crudDirector.createDirector(newDirector);
             }
         });
         searchSelection.addItem("Movie");
