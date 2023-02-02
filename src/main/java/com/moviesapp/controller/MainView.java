@@ -1,7 +1,9 @@
 package com.moviesapp.controller;
 
-import com.moviesapp.model.internal.Director;
 import com.moviesapp.model.crud.CRUDDirector;
+import com.moviesapp.model.crud.CRUDStudio;
+import com.moviesapp.model.external.Director;
+import com.moviesapp.model.external.Studio;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -39,6 +41,7 @@ public class MainView{
     private JButton registerStudioButton;
     private JComboBox searchSelection;
     private CRUDDirector crudDirector = new CRUDDirector();
+    private CRUDStudio crudStudio = new CRUDStudio();
 
     public MainView() {
 
@@ -53,7 +56,7 @@ public class MainView{
             @Override
             public void actionPerformed(ActionEvent e) {
                 java.sql.Date sqlDate = java.sql.Date.valueOf(birthDateIn.getText());
-                Director newDirector = new Director(
+                com.moviesapp.model.external.Director newDirector = new Director(
                         directorNameIn.getText(), sqlDate, (String)nationalityIn.getSelectedItem(),activeYearsIn.getText(),favoriteGenreIn.getText());
                 System.out.println(newDirector);
                 directorNameIn.setText("");
@@ -61,10 +64,27 @@ public class MainView{
                 nationalityIn.setSelectedIndex(-1);
                 activeYearsIn.setText("");
                 favoriteGenreIn.setText("");
-                //directorIDIn.setText("");
                 crudDirector.createDirector(newDirector);
             }
         });
+
+        registerStudioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                java.sql.Date sqlDate = java.sql.Date.valueOf(studioFoundationIn.getText());
+                com.moviesapp.model.external.Studio newStudio = new Studio(
+                        studioNameIn.getText(),studioIndustryIn.getText(),sqlDate,studioFounderIn.getText(),studioHQIn.getText());
+                System.out.println(newStudio);
+                studioNameIn.setText("");
+                studioIndustryIn.setText("");
+                studioFoundationIn.setText("");
+                studioFounderIn.setText("");
+                studioHQIn.setText("");
+                crudStudio.createStudio(newStudio);
+            }
+        });
+
+
         searchSelection.addItem("Movie");
         searchSelection.addItem("Director");
         searchSelection.addItem("Studio");

@@ -11,7 +11,7 @@ public class CRUDDirector {
     public CRUDDirector(){}
     DBManager conn = new DBManager();
     //Create, read, update, delete.
-    public void createDirector(Director director){
+    public void createDirector(com.moviesapp.model.external.Director director){
         try{
             Connection connection = conn.connect();
             String sql = "insert into director(name,birth_date,nationality,active_years,favorite_genre) values(?,?,?,?,?)";
