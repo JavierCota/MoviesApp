@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
 
-public class MainView{
+public class MainView extends javax.swing.JFrame{
     private JButton registerButton;
     private JLabel label1;
     private JPanel panel1;
@@ -45,12 +45,12 @@ public class MainView{
 
     public MainView() {
 
-        JFrame frame = new JFrame("MovieApp");
-        frame.setContentPane(mainPanel);
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
+        JFrame mainFrame = new JFrame("MovieApp");
+        mainFrame.setContentPane(mainPanel);
+        mainFrame.setVisible(true);
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.pack();
 
         registerDirButton.addActionListener(new ActionListener() {
             @Override
@@ -85,6 +85,7 @@ public class MainView{
         });
 
 
+
         searchSelection.addItem("Movie");
         searchSelection.addItem("Director");
         searchSelection.addItem("Studio");
@@ -99,5 +100,13 @@ public class MainView{
             nationalityIn.addItem(countryName);
         }
         nationalityIn.setSelectedIndex(-1);
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ViewDirector objViewDirector = new ViewDirector();
+                mainFrame.setContentPane(objViewDirector.getContentPane());
+                mainFrame.dispose();
+            }
+        });
     }
 }

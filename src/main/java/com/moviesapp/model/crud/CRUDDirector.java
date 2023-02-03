@@ -7,13 +7,14 @@ import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-public class CRUDDirector {
+public class CRUDDirector extends DBManager {
+
+    PreparedStatement statement;
     public CRUDDirector(){}
-    DBManager conn = new DBManager();
     //Create, read, update, delete.
     public void createDirector(com.moviesapp.model.external.Director director){
         try{
-            Connection connection = conn.connect();
+            Connection connection = connect();
             String sql = "insert into director(name,birth_date,nationality,active_years,favorite_genre) values(?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, director.getDirectorName());
