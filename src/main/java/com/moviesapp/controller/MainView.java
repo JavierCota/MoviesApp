@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
 
-public class MainView extends javax.swing.JFrame{
+public class MainView extends javax.swing.JFrame {
     private JButton registerButton;
     private JLabel label1;
     private JPanel panel1;
@@ -43,6 +43,7 @@ public class MainView extends javax.swing.JFrame{
     private CRUDDirector crudDirector = new CRUDDirector();
     private CRUDStudio crudStudio = new CRUDStudio();
 
+
     public MainView() {
 
         JFrame mainFrame = new JFrame("MovieApp");
@@ -52,12 +53,28 @@ public class MainView extends javax.swing.JFrame{
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.pack();
 
+        //Set nationalities in nationalityIn JComboBox
+        String[] countries = Locale.getISOCountries();
+        for (int i = 0; i < countries.length; i++) {
+            String country = countries[i];
+            Locale locale = new Locale("en", country);
+            String countryName = locale.getDisplayCountry();
+            nationalityIn.addItem(countryName);
+        }
+        nationalityIn.setSelectedIndex(-1);
+
+        //Set options in searchSelection JComboBox
+        searchSelection.addItem("Movie");
+        searchSelection.addItem("Director");
+        searchSelection.addItem("Studio");
+        searchSelection.setSelectedIndex(-1);
+
         registerDirButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 java.sql.Date sqlDate = java.sql.Date.valueOf(birthDateIn.getText());
                 com.moviesapp.model.external.Director newDirector = new Director(
-                        directorNameIn.getText(), sqlDate, (String)nationalityIn.getSelectedItem(),activeYearsIn.getText(),favoriteGenreIn.getText());
+                        directorNameIn.getText(), sqlDate, (String) nationalityIn.getSelectedItem(), activeYearsIn.getText(), favoriteGenreIn.getText());
                 System.out.println(newDirector);
                 directorNameIn.setText("");
                 birthDateIn.setText("");
@@ -73,7 +90,7 @@ public class MainView extends javax.swing.JFrame{
             public void actionPerformed(ActionEvent e) {
                 java.sql.Date sqlDate = java.sql.Date.valueOf(studioFoundationIn.getText());
                 com.moviesapp.model.external.Studio newStudio = new Studio(
-                        studioNameIn.getText(),studioIndustryIn.getText(),sqlDate,studioFounderIn.getText(),studioHQIn.getText());
+                        studioNameIn.getText(), studioIndustryIn.getText(), sqlDate, studioFounderIn.getText(), studioHQIn.getText());
                 System.out.println(newStudio);
                 studioNameIn.setText("");
                 studioIndustryIn.setText("");
@@ -84,28 +101,21 @@ public class MainView extends javax.swing.JFrame{
             }
         });
 
-
-
-        searchSelection.addItem("Movie");
-        searchSelection.addItem("Director");
-        searchSelection.addItem("Studio");
-        searchSelection.setSelectedIndex(-1);
-
-
-        String[] countries = Locale.getISOCountries();
-        for(int i = 0; i < countries.length; i++){
-            String country = countries[i];
-            Locale locale = new Locale("en",country);
-            String countryName = locale.getDisplayCountry();
-            nationalityIn.addItem(countryName);
-        }
-        nationalityIn.setSelectedIndex(-1);
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ViewDirector objViewDirector = new ViewDirector();
-                mainFrame.setContentPane(objViewDirector.getContentPane());
-                mainFrame.dispose();
+                String search = nameSearch.getText();
+                if (searchSelection.getSelectedItem().equals("Director")) {
+                    com.moviesapp.model.internal.Director director = crudDirector.readDirector(search);
+                    if (director == null) {
+                        JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
+                        nameSearch.setText("");
+                    } else {
+                        ViewDirector objViewDirector = new ViewDirector(director);
+                        mainFrame.setContentPane(objViewDirector.getContentPane());
+                        mainFrame.dispose();
+                    }
+                }
             }
         });
     }

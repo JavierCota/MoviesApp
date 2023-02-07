@@ -1,5 +1,7 @@
 package com.moviesapp.controller;
 
+import com.moviesapp.model.internal.Director;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,8 +17,7 @@ public class ViewDirector extends javax.swing.JFrame{
     private JButton viewDReturnBtn;
     private JPanel viewDPanel;
 
-
-    public ViewDirector() {
+    public ViewDirector(Director director) {
 
         JFrame frame = new JFrame("MovieApp");
         frame.setContentPane(viewDPanel);
@@ -24,6 +25,13 @@ public class ViewDirector extends javax.swing.JFrame{
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+
+            viewDName.setText(director.getDirectorName());
+            viewDBirthday.setText(director.getBirthDate().toString());
+            viewDNationality.setText(director.getNationality());
+            viewDActiveYears.setText(director.getActiveYears());
+            viewDFavGenre.setText(director.getFavoriteGenre());
+            viewDID.setText(director.getDirectorID().toString());
 
         viewDReturnBtn.addActionListener(new ActionListener() {
             @Override
