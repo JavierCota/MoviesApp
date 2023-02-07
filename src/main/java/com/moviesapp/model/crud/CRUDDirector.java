@@ -6,38 +6,70 @@ import com.moviesapp.model.internal.Director;
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class CRUDDirector extends DBManager {
 
     PreparedStatement statement;
-    public CRUDDirector(){}
+    ResultSet rs;
+
+    public CRUDDirector() {
+    }
+
     //Create, read, update, delete.
-    public void createDirector(com.moviesapp.model.external.Director director){
-        try{
+    public void createDirector(com.moviesapp.model.external.Director director) {
+        try {
             Connection connection = connect();
             String sql = "insert into director(name,birth_date,nationality,active_years,favorite_genre) values(?,?,?,?,?)";
-            PreparedStatement statement = connection.prepareStatement(sql);
+            statement = connection.prepareStatement(sql);
             statement.setString(1, director.getDirectorName());
-            statement.setDate(2,director.getBirthDate());
-            statement.setString(3,director.getNationality());
-            statement.setString(4,director.getActiveYears());
-            statement.setString(5,director.getFavoriteGenre());
+            statement.setDate(2, director.getBirthDate());
+            statement.setString(3, director.getNationality());
+            statement.setString(4, director.getActiveYears());
+            statement.setString(5, director.getFavoriteGenre());
             statement.execute();
             statement.close();
             connection.close();
-            JOptionPane.showMessageDialog(null, "Registration was completed successfully","Message", JOptionPane.INFORMATION_MESSAGE);
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Registration was not completed "+e,"Message", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Registration was not completed " + e, "Message", JOptionPane.ERROR_MESSAGE);
         }
     }
-    public void readDirector(Director director){
+
+    public Director readDirector(String name) {
         //Read from database.
         //Change return type.
+        Director director = null;
+        try {
+            Connection connection = connect();
+            String sql = "select * from director where name = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, name);
+            rs = statement.executeQuery();
+            while ((rs.next())){
+             director = new Director(
+                    rs.getString("name"),
+                    rs.getDate("birth_date"),
+                    rs.getString("nationality"),
+                    rs.getString("active_years"),
+                    rs.getString("favorite_genre"),
+                    rs.getInt("id_director"));
+            }
+            rs.close();
+            statement.close();
+            connection.close();
+            return director;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error in system search " + e, "Search error", JOptionPane.ERROR_MESSAGE);
+            return director;
+        }
     }
-    public void updateDirector(Director director){
+
+    public void updateDirector(Director director) {
         //Update in database.
     }
-    public void deleteDirector(Director director){
+
+    public void deleteDirector(Director director) {
         //Delete in database.
     }
 }
