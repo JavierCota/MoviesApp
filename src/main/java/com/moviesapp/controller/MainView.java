@@ -116,6 +116,17 @@ public class MainView extends javax.swing.JFrame {
                         mainFrame.dispose();
                     }
                 }
+                if (searchSelection.getSelectedItem().equals("Studio")) {
+                    com.moviesapp.model.internal.Studio studio = crudStudio.readStudio(search);
+                    if (studio == null) {
+                        JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
+                        nameSearch.setText("");
+                    } else {
+                        ViewStudio objViewStudio = new ViewStudio(studio);
+                        mainFrame.setContentPane(objViewStudio.getContentPane());
+                        mainFrame.dispose();
+                    }
+                }
             }
         });
     }
