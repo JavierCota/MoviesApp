@@ -1,5 +1,6 @@
 package com.moviesapp.controller;
 
+import com.moviesapp.model.crud.CRUDDirector;
 import com.moviesapp.model.internal.Director;
 
 import javax.swing.*;
@@ -16,6 +17,9 @@ public class ViewDirector extends javax.swing.JFrame {
     private JTextField viewDNationality;
     private JButton viewDReturnBtn;
     private JPanel viewDPanel;
+    private JButton viewDUpdateBtn;
+    private JButton viewDDeleteButton;
+    private CRUDDirector crudDirector = new CRUDDirector();
 
     public ViewDirector(Director director) {
 
@@ -39,6 +43,18 @@ public class ViewDirector extends javax.swing.JFrame {
                 MainView objMainView = new MainView();
                 frame.setContentPane(objMainView.getContentPane());
                 frame.dispose();
+            }
+        });
+        viewDDeleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this register?","Delete register", JOptionPane.YES_NO_OPTION);
+                if(reply == JOptionPane.YES_OPTION) {
+                    crudDirector.deleteDirector(director.getDirectorID());
+                    MainView objMainView = new MainView();
+                    frame.setContentPane(objMainView.getContentPane());
+                    frame.dispose();
+                }
             }
         });
     }

@@ -65,4 +65,20 @@ public class CRUDStudio extends DBManager {
             return studio;
         }
     }
+
+    public void deleteStudio(Integer studioID) {
+        //Delete in database.
+        try {
+            Connection connection = connect();
+            String sql = "delete from studio where id_studio = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, studioID);
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+            JOptionPane.showMessageDialog(null,"The register was deleted successfully","Deleted",JOptionPane.INFORMATION_MESSAGE);
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"An error occurred while deleting the register "+e,"Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

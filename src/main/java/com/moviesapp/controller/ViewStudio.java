@@ -1,5 +1,6 @@
 package com.moviesapp.controller;
 
+import com.moviesapp.model.crud.CRUDStudio;
 import com.moviesapp.model.internal.Studio;
 
 import javax.swing.*;
@@ -16,6 +17,9 @@ public class ViewStudio extends javax.swing.JFrame {
     private JTextField viewSID;
     private JButton viewSReturnBtn;
     private JPanel viewSPanel;
+    private JButton viewSUpdateBtn;
+    private JButton viewSDeleteBtn;
+    private CRUDStudio crudStudio = new CRUDStudio();
 
     public ViewStudio(Studio studio) {
 
@@ -39,6 +43,18 @@ public class ViewStudio extends javax.swing.JFrame {
                 MainView objMainView = new MainView();
                 frame.setContentPane(objMainView.getContentPane());
                 frame.dispose();
+            }
+        });
+        viewSDeleteBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this register?","Delete register", JOptionPane.YES_NO_OPTION);
+                if(reply == JOptionPane.YES_OPTION) {
+                    crudStudio.deleteStudio(studio.getStudioID());
+                    MainView objMainView = new MainView();
+                    frame.setContentPane(objMainView.getContentPane());
+                    frame.dispose();
+                }
             }
         });
     }
