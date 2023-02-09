@@ -67,6 +67,23 @@ public class CRUDDirector extends DBManager {
 
     public void updateDirector(Director director) {
         //Update in database.
+        try{
+            Connection connection = connect();
+            String sql = "update director set name=?,birth_date=?,nationality=?,active_years=?,favorite_genre=? where id_director = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, director.getDirectorName());
+            statement.setDate(2, director.getBirthDate());
+            statement.setString(3, director.getNationality());
+            statement.setString(4, director.getActiveYears());
+            statement.setString(5, director.getFavoriteGenre());
+            statement.setInt(6,director.getDirectorID());
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+            JOptionPane.showMessageDialog(null, "Register was updated successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Register was not updated " + e, "Message", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void deleteDirector(Integer directorID) {

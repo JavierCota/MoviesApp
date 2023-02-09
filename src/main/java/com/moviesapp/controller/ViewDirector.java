@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 public class ViewDirector extends javax.swing.JFrame {
     private JTextField viewDName;
     private JPanel panel1;
-    private JTextField viewDID;
+    private JLabel viewDID;
     private JTextField viewDFavGenre;
     private JTextField viewDBirthday;
     private JTextField viewDActiveYears;
@@ -54,6 +54,22 @@ public class ViewDirector extends javax.swing.JFrame {
                     MainView objMainView = new MainView();
                     frame.setContentPane(objMainView.getContentPane());
                     frame.dispose();
+                }
+            }
+        });
+        viewDUpdateBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to update this register?","Update register", JOptionPane.YES_NO_OPTION);
+                if(reply == JOptionPane.YES_OPTION) {
+                    java.sql.Date sqlDate = java.sql.Date.valueOf(viewDBirthday.getText());
+                    director.setDirectorName(viewDName.getText());
+                    director.setBirthDate(sqlDate);
+                    director.setNationality(viewDNationality.getText());
+                    director.setActiveYears(viewDActiveYears.getText());
+                    director.setFavoriteGenre(viewDFavGenre.getText());
+                    director.setDirectorID(Integer.parseInt(viewDID.getText()));
+                    crudDirector.updateDirector(director);
                 }
             }
         });
