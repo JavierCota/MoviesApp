@@ -14,7 +14,7 @@ public class ViewStudio extends javax.swing.JFrame {
     private JTextField viewSFoundation;
     private JTextField viewSFounder;
     private JTextField viewSHQ;
-    private JTextField viewSID;
+    private JLabel viewSID;
     private JButton viewSReturnBtn;
     private JPanel viewSPanel;
     private JButton viewSUpdateBtn;
@@ -54,6 +54,21 @@ public class ViewStudio extends javax.swing.JFrame {
                     MainView objMainView = new MainView();
                     frame.setContentPane(objMainView.getContentPane());
                     frame.dispose();
+                }
+            }
+        });
+        viewSUpdateBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to update this register?","Update register", JOptionPane.YES_NO_OPTION);
+                if(reply == JOptionPane.YES_OPTION) {
+                    java.sql.Date sqlDate = java.sql.Date.valueOf(viewSFoundation.getText());
+                    studio.setStudioName(viewSName.getText());
+                    studio.setIndustry(viewSIndustry.getText());
+                    studio.setFoundation(sqlDate);
+                    studio.setFounder(viewSFounder.getText());
+                    studio.setHeadquarters(viewSHQ.getText());
+                    crudStudio.updateStudio(studio);
                 }
             }
         });

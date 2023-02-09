@@ -65,6 +65,26 @@ public class CRUDStudio extends DBManager {
             return studio;
         }
     }
+    public void updateStudio(Studio studio) {
+        //Update in database.
+        try{
+            Connection connection = connect();
+            String sql = "update studio set name=?,industry=?,foundation=?,founder=?,headquarters=? where id_studio = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, studio.getStudioName());
+            statement.setString(2,studio.getIndustry());
+            statement.setDate(3,studio.getFoundation());
+            statement.setString(4,studio.getFounder());
+            statement.setString(5,studio.getHeadquarters());
+            statement.setInt(6,studio.getStudioID());
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+            JOptionPane.showMessageDialog(null, "Register was updated successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Register was not updated " + e, "Message", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     public void deleteStudio(Integer studioID) {
         //Delete in database.

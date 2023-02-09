@@ -68,7 +68,6 @@ public class ViewDirector extends javax.swing.JFrame {
                     director.setNationality(viewDNationality.getText());
                     director.setActiveYears(viewDActiveYears.getText());
                     director.setFavoriteGenre(viewDFavGenre.getText());
-                    director.setDirectorID(Integer.parseInt(viewDID.getText()));
                     crudDirector.updateDirector(director);
                 }
             }
