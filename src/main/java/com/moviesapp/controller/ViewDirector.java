@@ -6,6 +6,7 @@ import com.moviesapp.model.internal.Director;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 
 public class ViewDirector extends javax.swing.JFrame {
     private JTextField viewDName;
@@ -19,7 +20,6 @@ public class ViewDirector extends javax.swing.JFrame {
     private JPanel viewDPanel;
     private JButton viewDUpdateBtn;
     private JButton viewDDeleteButton;
-    private MainView objMainView = new MainView();
     private CRUDDirector crudDirector = new CRUDDirector();
 
     public ViewDirector(Director director) {
@@ -31,7 +31,7 @@ public class ViewDirector extends javax.swing.JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
 
-        objMainView.nationalityJComboB(viewDNationality);
+        nationalityJComboB(viewDNationality);
 
         viewDName.setText(director.getDirectorName());
         viewDBirthday.setText(director.getBirthDate().toString());
@@ -43,7 +43,7 @@ public class ViewDirector extends javax.swing.JFrame {
         viewDReturnBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                objMainView = new MainView();
+                MainView objMainView = new MainView();
                 frame.setContentPane(objMainView.getContentPane());
                 frame.dispose();
             }
@@ -54,7 +54,7 @@ public class ViewDirector extends javax.swing.JFrame {
                 int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this register?","Delete register", JOptionPane.YES_NO_OPTION);
                 if(reply == JOptionPane.YES_OPTION) {
                     crudDirector.deleteDirector(director.getDirectorID());
-                    objMainView = new MainView();
+                    MainView objMainView = new MainView();
                     frame.setContentPane(objMainView.getContentPane());
                     frame.dispose();
                 }
@@ -75,5 +75,16 @@ public class ViewDirector extends javax.swing.JFrame {
                 }
             }
         });
+    }
+    public void nationalityJComboB(JComboBox nationalityIn){
+        //Set nationalities in nationalityIn JComboBox
+        String[] countries = Locale.getISOCountries();
+        for (int i = 0; i < countries.length; i++) {
+            String country = countries[i];
+            Locale locale = new Locale("en", country);
+            String countryName = locale.getDisplayCountry();
+            nationalityIn.addItem(countryName);
+        }
+        nationalityIn.setSelectedIndex(-1);
     }
 }
