@@ -14,11 +14,12 @@ public class ViewDirector extends javax.swing.JFrame {
     private JTextField viewDFavGenre;
     private JTextField viewDBirthday;
     private JTextField viewDActiveYears;
-    private JTextField viewDNationality;
+    private JComboBox viewDNationality;
     private JButton viewDReturnBtn;
     private JPanel viewDPanel;
     private JButton viewDUpdateBtn;
     private JButton viewDDeleteButton;
+    private MainView objMainView = new MainView();
     private CRUDDirector crudDirector = new CRUDDirector();
 
     public ViewDirector(Director director) {
@@ -30,9 +31,11 @@ public class ViewDirector extends javax.swing.JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
 
+        objMainView.nationalityJComboB(viewDNationality);
+
         viewDName.setText(director.getDirectorName());
         viewDBirthday.setText(director.getBirthDate().toString());
-        viewDNationality.setText(director.getNationality());
+        viewDNationality.setSelectedItem(director.getNationality());
         viewDActiveYears.setText(director.getActiveYears());
         viewDFavGenre.setText(director.getFavoriteGenre());
         viewDID.setText(director.getDirectorID().toString());
@@ -40,7 +43,7 @@ public class ViewDirector extends javax.swing.JFrame {
         viewDReturnBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MainView objMainView = new MainView();
+                objMainView = new MainView();
                 frame.setContentPane(objMainView.getContentPane());
                 frame.dispose();
             }
@@ -51,7 +54,7 @@ public class ViewDirector extends javax.swing.JFrame {
                 int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this register?","Delete register", JOptionPane.YES_NO_OPTION);
                 if(reply == JOptionPane.YES_OPTION) {
                     crudDirector.deleteDirector(director.getDirectorID());
-                    MainView objMainView = new MainView();
+                    objMainView = new MainView();
                     frame.setContentPane(objMainView.getContentPane());
                     frame.dispose();
                 }
@@ -65,7 +68,7 @@ public class ViewDirector extends javax.swing.JFrame {
                     java.sql.Date sqlDate = java.sql.Date.valueOf(viewDBirthday.getText());
                     director.setDirectorName(viewDName.getText());
                     director.setBirthDate(sqlDate);
-                    director.setNationality(viewDNationality.getText());
+                    director.setNationality(viewDNationality.getSelectedItem().toString());
                     director.setActiveYears(viewDActiveYears.getText());
                     director.setFavoriteGenre(viewDFavGenre.getText());
                     crudDirector.updateDirector(director);

@@ -1,5 +1,6 @@
 package com.moviesapp.model.crud;
 
+import com.moviesapp.model.internal.Director;
 import com.moviesapp.model.util.DBManager;
 import com.moviesapp.model.internal.Studio;
 
@@ -7,6 +8,8 @@ import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CRUDStudio extends DBManager {
 
@@ -15,8 +18,6 @@ public class CRUDStudio extends DBManager {
 
     public CRUDStudio() {
     }
-
-    DBManager conn = new DBManager();
 
     public void createStudio(com.moviesapp.model.external.Studio studio) {
         try {
@@ -100,5 +101,28 @@ public class CRUDStudio extends DBManager {
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null,"An error occurred while deleting the register "+e,"Error",JOptionPane.ERROR_MESSAGE);
         }
+    }
+    public List<Studio> studioList(){
+        Studio studio = null;
+        List<Studio> studioList = new ArrayList<Studio>();
+        try {
+            Connection connection = connect();
+            String sql = "select * from studio";
+            statement = connection.prepareStatement(sql);
+            rs = statement.executeQuery();
+            while ((rs.next())){
+                studio = new Studio(
+                        rs.getString("name"),"" ,rs.getDate("foundation") ,"" ,"",
+                        rs.getInt("id_studio"));
+
+                studioList.add(studio);
+            }
+            rs.close();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error in system search " + e, "Search error", JOptionPane.ERROR_MESSAGE);
+        }
+        return studioList;
     }
 }

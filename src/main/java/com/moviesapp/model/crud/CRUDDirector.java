@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CRUDDirector extends DBManager {
 
@@ -101,4 +103,30 @@ public class CRUDDirector extends DBManager {
             JOptionPane.showMessageDialog(null,"An error occurred while deleting the register "+e,"Error",JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    public List<Director> directorList(){
+        Director director = null;
+        List<Director> directorList = new ArrayList<Director>();
+        try {
+            Connection connection = connect();
+            String sql = "select * from director";
+            statement = connection.prepareStatement(sql);
+            rs = statement.executeQuery();
+            while ((rs.next())){
+                director = new Director(
+                        rs.getString("name"),rs.getDate("birth_date") ,"" ,"" ,"",
+                        rs.getInt("id_director"));
+
+                directorList.add(director);
+            }
+            rs.close();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error in system search " + e, "Search error", JOptionPane.ERROR_MESSAGE);
+        }
+        return directorList;
+    }
+    //Crear metodo que regrese lista de directores, guardar en mapa nombre y ID (Tambien para studio).
+    //Crear jcombobox en mainview movie para studio y director.
 }

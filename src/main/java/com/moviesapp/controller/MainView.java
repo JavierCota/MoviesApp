@@ -54,14 +54,7 @@ public class MainView extends javax.swing.JFrame {
         mainFrame.pack();
 
         //Set nationalities in nationalityIn JComboBox
-        String[] countries = Locale.getISOCountries();
-        for (int i = 0; i < countries.length; i++) {
-            String country = countries[i];
-            Locale locale = new Locale("en", country);
-            String countryName = locale.getDisplayCountry();
-            nationalityIn.addItem(countryName);
-        }
-        nationalityIn.setSelectedIndex(-1);
+        nationalityJComboB(nationalityIn);
 
         //Set options in searchSelection JComboBox
         searchSelection.addItem("Movie");
@@ -129,5 +122,16 @@ public class MainView extends javax.swing.JFrame {
                 }
             }
         });
+    }
+    public void nationalityJComboB(JComboBox nationalityIn){
+        //Set nationalities in nationalityIn JComboBox
+        String[] countries = Locale.getISOCountries();
+        for (int i = 0; i < countries.length; i++) {
+            String country = countries[i];
+            Locale locale = new Locale("en", country);
+            String countryName = locale.getDisplayCountry();
+            nationalityIn.addItem(countryName);
+        }
+        nationalityIn.setSelectedIndex(-1);
     }
 }
