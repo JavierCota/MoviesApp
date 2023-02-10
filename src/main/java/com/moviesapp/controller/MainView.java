@@ -8,7 +8,7 @@ import com.moviesapp.model.external.Studio;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -146,12 +146,16 @@ public class MainView extends javax.swing.JFrame {
     }
     public void directorJComboB(JComboBox directorReg){
         List<com.moviesapp.model.internal.Director> directorList;
-        crudDirector.directorList().forEach(director -> directorReg.addItem(director.getDirectorID() + " " + director.getDirectorName()));
+        directorList = crudDirector.directorList();
+        directorList.sort(Comparator.comparing(com.moviesapp.model.internal.Director::getDirectorName));
+        directorList.forEach(director -> directorReg.addItem(director.getDirectorName() + " " + director.getDirectorID()));
         directorReg.setSelectedIndex(-1);
     }
     public void studioJComboB(JComboBox studioReg){
         List<com.moviesapp.model.internal.Studio> studioList;
-        crudStudio.studioList().forEach(studio -> studioReg.addItem(studio.getStudioID() + " " + studio.getStudioName()));
+        studioList = crudStudio.studioList();
+        studioList.sort(Comparator.comparing(com.moviesapp.model.internal.Studio::getStudioName));
+        studioList.forEach(studio -> studioReg.addItem(studio.getStudioName() + " " + studio.getStudioID()));
         studioReg.setSelectedIndex(-1);
     }
 }
