@@ -34,7 +34,7 @@
                   <text value="Please fill out to register a new movie."/>
                 </properties>
               </component>
-              <component id="eb8b8" class="javax.swing.JTextField" binding="descriptionReg">
+              <component id="eb8b8" class="javax.swing.JTextField" binding="descriptionIn">
                 <constraints>
                   <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -42,7 +42,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="591b4" class="javax.swing.JTextField" binding="releaseDateReg">
+              <component id="591b4" class="javax.swing.JTextField" binding="releaseDateIn">
                 <constraints>
                   <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -50,7 +50,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="3b0fe" class="javax.swing.JTextField" binding="movieNameReg">
+              <component id="3b0fe" class="javax.swing.JTextField" binding="movieNameIn">
                 <constraints>
                   <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -58,7 +58,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="84464" class="javax.swing.JTextField" binding="genreReg">
+              <component id="84464" class="javax.swing.JTextField" binding="genreIn">
                 <constraints>
                   <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -66,7 +66,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="d1282" class="javax.swing.JTextField" binding="durationReg">
+              <component id="d1282" class="javax.swing.JTextField" binding="durationIn">
                 <constraints>
                   <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -74,7 +74,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="f3f83" class="javax.swing.JTextField" binding="classificationReg">
+              <component id="f3f83" class="javax.swing.JTextField" binding="classificationIn">
                 <constraints>
                   <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -130,7 +130,7 @@
                   <text value="Description"/>
                 </properties>
               </component>
-              <component id="981eb" class="javax.swing.JComboBox" binding="studioReg">
+              <component id="981eb" class="javax.swing.JComboBox" binding="studioIn">
                 <constraints>
                   <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -144,7 +144,7 @@
                   <text value="Studio"/>
                 </properties>
               </component>
-              <component id="5143c" class="javax.swing.JComboBox" binding="directorReg">
+              <component id="5143c" class="javax.swing.JComboBox" binding="directorIn">
                 <constraints>
                   <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -160,7 +160,7 @@
               </component>
             </children>
           </grid>
-          <component id="e3a73" class="javax.swing.JButton" binding="registerButton">
+          <component id="e3a73" class="javax.swing.JButton" binding="registerMovieButton">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="300" height="30"/>

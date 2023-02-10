@@ -1,6 +1,6 @@
 package com.moviesapp.model.internal;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,18 +11,18 @@ public class Movie {
     private String classification;
     private Date releaseDate;
     private String description;
-    private List<Integer> directorIDs;
-    private List<Integer> studioIDs;
+    private Integer directorID;
+    private Integer studioID;
 
-    public Movie(String movieName, String genre, Integer duration, String classification, Date releaseDate, String description, List<Integer> directorIDs, List<Integer> studioIDs) {
+    public Movie(String movieName, String genre, Integer duration, String classification, Date releaseDate, String description, Integer directorID, Integer studioID) {
         this.movieName = movieName;
         this.genre = genre;
         this.duration = duration;
         this.classification = classification;
         this.releaseDate = releaseDate;
         this.description = description;
-        this.directorIDs = directorIDs;
-        this.studioIDs = studioIDs;
+        this.directorID = directorID;
+        this.studioID = studioID;
     }
 
     public String getMovieName() {
@@ -72,20 +72,20 @@ public class Movie {
     public void setDescription(String description) {
         this.description = description;
     }
-    public List<Integer> getDirectorIDs() {
-        return directorIDs;
+    public Integer getDirectorID() {
+        return directorID;
     }
 
-    public void setDirectorIDs(List<Integer> directorIDs) {
-        this.directorIDs = directorIDs;
+    public void setDirectorID(Integer directorID) {
+        this.directorID = directorID;
     }
 
-    public List<Integer> getStudioIDs() {
-        return studioIDs;
+    public Integer getStudioID() {
+        return studioID;
     }
 
-    public void setStudioIDs(List<Integer> studioIDs) {
-        this.studioIDs = studioIDs;
+    public void setStudioID(Integer studioID) {
+        this.studioID = studioID;
     }
 
     @Override
@@ -93,12 +93,12 @@ public class Movie {
         if (this == o) return true;
         if (!(o instanceof Movie)) return false;
         Movie movie = (Movie) o;
-        return movieName.equals(movie.movieName) && Objects.equals(genre, movie.genre) && Objects.equals(duration, movie.duration) && Objects.equals(classification, movie.classification) && Objects.equals(releaseDate, movie.releaseDate) && Objects.equals(description, movie.description) && directorIDs.equals(movie.directorIDs) && studioIDs.equals(movie.studioIDs);
+        return movieName.equals(movie.movieName) && Objects.equals(genre, movie.genre) && Objects.equals(duration, movie.duration) && Objects.equals(classification, movie.classification) && Objects.equals(releaseDate, movie.releaseDate) && Objects.equals(description, movie.description) && directorID.equals(movie.directorID) && studioID.equals(movie.studioID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(movieName, genre, duration, classification, releaseDate, description, directorIDs, studioIDs);
+        return Objects.hash(movieName, genre, duration, classification, releaseDate, description, directorID, studioID);
     }
 
     @Override
@@ -110,8 +110,8 @@ public class Movie {
                 ", classification='" + classification + '\'' +
                 ", releaseDate=" + releaseDate +
                 ", description='" + description + '\'' +
-                ", directorIDs=" + directorIDs +
-                ", studioIDs=" + studioIDs +
+                ", directorID=" + directorID +
+                ", studioID=" + studioID +
                 '}';
     }
 }

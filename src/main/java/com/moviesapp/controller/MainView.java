@@ -1,7 +1,9 @@
 package com.moviesapp.controller;
 
+import com.moviesapp.model.crud.CRUDMovie;
 import com.moviesapp.model.crud.CRUDDirector;
 import com.moviesapp.model.crud.CRUDStudio;
+import com.moviesapp.model.internal.Movie;
 import com.moviesapp.model.external.Director;
 import com.moviesapp.model.external.Studio;
 
@@ -13,15 +15,15 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainView extends javax.swing.JFrame {
-    private JButton registerButton;
+    private JButton registerMovieButton;
     private JLabel label1;
     private JPanel panel1;
-    private JTextField descriptionReg;
-    private JTextField releaseDateReg;
-    private JTextField movieNameReg;
-    private JTextField genreReg;
-    private JTextField durationReg;
-    private JTextField classificationReg;
+    private JTextField descriptionIn;
+    private JTextField releaseDateIn;
+    private JTextField movieNameIn;
+    private JTextField genreIn;
+    private JTextField durationIn;
+    private JTextField classificationIn;
     private JPanel registerPanel;
     private JTabbedPane mainPanel;
     private JTextField nameSearch;
@@ -42,8 +44,9 @@ public class MainView extends javax.swing.JFrame {
     private JPanel studioRSPanel;
     private JButton registerStudioButton;
     private JComboBox searchSelection;
-    private JComboBox studioReg;
-    private JComboBox directorReg;
+    private JComboBox studioIn;
+    private JComboBox directorIn;
+    private CRUDMovie crudMovie = new CRUDMovie();
     private CRUDDirector crudDirector = new CRUDDirector();
     private CRUDStudio crudStudio = new CRUDStudio();
 
@@ -61,16 +64,37 @@ public class MainView extends javax.swing.JFrame {
         nationalityJComboB(nationalityIn);
 
         //Set directors in directorReg JComboBox
-        directorJComboB(directorReg);
+        directorJComboB(directorIn);
 
         //Set studios in studioReg JComboBox
-        studioJComboB(studioReg);
+        studioJComboB(studioIn);
 
         //Set options in searchSelection JComboBox
         searchSelection.addItem("Movie");
         searchSelection.addItem("Director");
         searchSelection.addItem("Studio");
         searchSelection.setSelectedIndex(-1);
+
+        registerMovieButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                java.sql.Date sqlDate = java.sql.Date.valueOf(releaseDateIn.getText());
+                Movie newMovie = new Movie(
+                        movieNameIn.getText(), genreIn.getText(), Integer.parseInt(durationIn.getText()), classificationIn.getText(), sqlDate, descriptionIn.getText(),
+                        returnInt((String) directorIn.getSelectedItem()), returnInt((String) studioIn.getSelectedItem()));
+                System.out.println(newMovie);
+                movieNameIn.setText("");
+                genreIn.setText("");
+                durationIn.setText("");
+                classificationIn.setText("");
+                releaseDateIn.setText("");
+                descriptionIn.setText("");
+                directorIn.setSelectedIndex(-1);
+                studioIn.setSelectedIndex(-1);
+                crudMovie.createMovie(newMovie);
+
+            }
+        });
 
         registerDirButton.addActionListener(new ActionListener() {
             @Override
@@ -144,18 +168,22 @@ public class MainView extends javax.swing.JFrame {
         }
         nationalityIn.setSelectedIndex(-1);
     }
-    public void directorJComboB(JComboBox directorReg){
+    public void directorJComboB(JComboBox directorIn){
         List<com.moviesapp.model.internal.Director> directorList;
         directorList = crudDirector.directorList();
         directorList.sort(Comparator.comparing(com.moviesapp.model.internal.Director::getDirectorName));
-        directorList.forEach(director -> directorReg.addItem(director.getDirectorName() + " " + director.getDirectorID()));
-        directorReg.setSelectedIndex(-1);
+        directorList.forEach(director -> directorIn.addItem(director.getDirectorName() + " " + director.getDirectorID()));
+        directorIn.setSelectedIndex(-1);
     }
-    public void studioJComboB(JComboBox studioReg){
+    public void studioJComboB(JComboBox studioIn){
         List<com.moviesapp.model.internal.Studio> studioList;
         studioList = crudStudio.studioList();
         studioList.sort(Comparator.comparing(com.moviesapp.model.internal.Studio::getStudioName));
-        studioList.forEach(studio -> studioReg.addItem(studio.getStudioName() + " " + studio.getStudioID()));
-        studioReg.setSelectedIndex(-1);
+        studioList.forEach(studio -> studioIn.addItem(studio.getStudioName() + " " + studio.getStudioID()));
+        studioIn.setSelectedIndex(-1);
+    }
+    public Integer returnInt(String textWID){
+        int id = Integer.parseInt(textWID.replaceAll("[\\D]", ""));
+        return id;
     }
 }
