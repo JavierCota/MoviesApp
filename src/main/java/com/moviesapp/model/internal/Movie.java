@@ -1,7 +1,7 @@
 package com.moviesapp.model.internal;
 
+
 import java.sql.Date;
-import java.util.List;
 import java.util.Objects;
 
 public class Movie {
@@ -11,16 +11,18 @@ public class Movie {
     private String classification;
     private Date releaseDate;
     private String description;
+    private Integer movieID;
     private Integer directorID;
     private Integer studioID;
 
-    public Movie(String movieName, String genre, Integer duration, String classification, Date releaseDate, String description, Integer directorID, Integer studioID) {
+    public Movie(String movieName, String genre, Integer duration, String classification, Date releaseDate, String description, Integer movieID, Integer directorID, Integer studioID) {
         this.movieName = movieName;
         this.genre = genre;
         this.duration = duration;
         this.classification = classification;
         this.releaseDate = releaseDate;
         this.description = description;
+        this.movieID = movieID;
         this.directorID = directorID;
         this.studioID = studioID;
     }
@@ -72,6 +74,15 @@ public class Movie {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Integer getMovieID() {
+        return movieID;
+    }
+
+    public void setMovieID(Integer movieID) {
+        this.movieID = movieID;
+    }
+
     public Integer getDirectorID() {
         return directorID;
     }
@@ -93,12 +104,12 @@ public class Movie {
         if (this == o) return true;
         if (!(o instanceof Movie)) return false;
         Movie movie = (Movie) o;
-        return movieName.equals(movie.movieName) && Objects.equals(genre, movie.genre) && Objects.equals(duration, movie.duration) && Objects.equals(classification, movie.classification) && Objects.equals(releaseDate, movie.releaseDate) && Objects.equals(description, movie.description) && directorID.equals(movie.directorID) && studioID.equals(movie.studioID);
+        return movieName.equals(movie.movieName) && Objects.equals(genre, movie.genre) && Objects.equals(duration, movie.duration) && Objects.equals(classification, movie.classification) && Objects.equals(releaseDate, movie.releaseDate) && Objects.equals(description, movie.description) && movieID.equals(movie.movieID) && directorID.equals(movie.directorID) && studioID.equals(movie.studioID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(movieName, genre, duration, classification, releaseDate, description, directorID, studioID);
+        return Objects.hash(movieName, genre, duration, classification, releaseDate, description, movieID, directorID, studioID);
     }
 
     @Override
@@ -110,6 +121,7 @@ public class Movie {
                 ", classification='" + classification + '\'' +
                 ", releaseDate=" + releaseDate +
                 ", description='" + description + '\'' +
+                ", movieID=" + movieID +
                 ", directorID=" + directorID +
                 ", studioID=" + studioID +
                 '}';

@@ -17,7 +17,7 @@ public class CRUDMovie extends DBManager {
     }
 
     //Create, read, update, delete.
-    public void createMovie(Movie movie) {
+    public void createMovie(com.moviesapp.model.external.Movie movie) {
         try {
             Connection connection = connect();
             String sql = "insert into movie(name,genre,duration_min,classification,release_date,description,id_director,id_studio) values(?,?,?,?,?,?,?,?)";
@@ -57,6 +57,7 @@ public class CRUDMovie extends DBManager {
                         rs.getString("classification"),
                         rs.getDate("release_date"),
                         rs.getString("description"),
+                        rs.getInt("id_movie"),
                         rs.getInt("id_director"),
                         rs.getInt("id_studio"));
             }

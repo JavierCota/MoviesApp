@@ -3,7 +3,7 @@ package com.moviesapp.controller;
 import com.moviesapp.model.crud.CRUDMovie;
 import com.moviesapp.model.crud.CRUDDirector;
 import com.moviesapp.model.crud.CRUDStudio;
-import com.moviesapp.model.internal.Movie;
+import com.moviesapp.model.external.Movie;
 import com.moviesapp.model.external.Director;
 import com.moviesapp.model.external.Studio;
 
@@ -79,7 +79,7 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 java.sql.Date sqlDate = java.sql.Date.valueOf(releaseDateIn.getText());
-                Movie newMovie = new Movie(
+                com.moviesapp.model.external.Movie newMovie = new Movie(
                         movieNameIn.getText(), genreIn.getText(), Integer.parseInt(durationIn.getText()), classificationIn.getText(), sqlDate, descriptionIn.getText(),
                         returnInt((String) directorIn.getSelectedItem()), returnInt((String) studioIn.getSelectedItem()));
                 System.out.println(newMovie);
@@ -131,6 +131,17 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String search = nameSearch.getText();
+                if (searchSelection.getSelectedItem().equals("Movie")) {
+                    com.moviesapp.model.internal.Movie movie = crudMovie.readMovie(search);
+                    if (movie == null) {
+                        JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
+                        nameSearch.setText("");
+                    } else {
+                        ViewMovie objViewMovie = new ViewMovie(movie);
+                        mainFrame.setContentPane(objViewMovie.getContentPane());
+                        mainFrame.dispose();
+                    }
+                }
                 if (searchSelection.getSelectedItem().equals("Director")) {
                     com.moviesapp.model.internal.Director director = crudDirector.readDirector(search);
                     if (director == null) {

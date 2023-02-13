@@ -10,7 +10,6 @@ import java.util.Locale;
 
 public class ViewDirector extends javax.swing.JFrame {
     private JTextField viewDName;
-    private JPanel panel1;
     private JLabel viewDID;
     private JTextField viewDFavGenre;
     private JTextField viewDBirthday;
