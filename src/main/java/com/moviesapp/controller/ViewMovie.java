@@ -63,5 +63,22 @@ public class ViewMovie extends javax.swing.JFrame {
                 }
             }
         });
+
+        viewMUpdateBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to update this register?","Update register", JOptionPane.YES_NO_OPTION);
+                if(reply == JOptionPane.YES_OPTION) {
+                    java.sql.Date sqlDate = java.sql.Date.valueOf(viewMReleaseD.getText());
+                    movie.setMovieName(viewMName.getText());
+                    movie.setGenre(viewMGenre.getText());
+                    movie.setDuration(Integer.parseInt(viewMDuration.getText()));
+                    movie.setClassification(viewMClassification.getText());
+                    movie.setReleaseDate(sqlDate);
+                    movie.setDescription(viewMDescription.getText());
+                    crudMovie.updateMovie(movie);
+                }
+            }
+        });
     }
 }

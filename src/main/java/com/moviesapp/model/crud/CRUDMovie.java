@@ -71,6 +71,28 @@ public class CRUDMovie extends DBManager {
         }
     }
 
+    public void updateMovie(Movie movie) {
+        //Update in database.
+        try{
+            Connection connection = connect();
+            String sql = "update movie set name=?,genre=?,duration_min=?,classification=?,release_date=?,description=? where id_movie = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, movie.getMovieName());
+            statement.setString(2,movie.getGenre());
+            statement.setInt(3,movie.getDuration());
+            statement.setString(4, movie.getClassification());
+            statement.setDate(5,movie.getReleaseDate());
+            statement.setString(6, movie.getDescription());
+            statement.setInt(7,movie.getMovieID());
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+            JOptionPane.showMessageDialog(null, "Register was updated successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Register was not updated " + e, "Message", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public void deleteMovie(Integer movieID){
             //Delete in database.
             try {
