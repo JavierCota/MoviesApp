@@ -70,4 +70,20 @@ public class CRUDMovie extends DBManager {
             return movie;
         }
     }
+
+    public void deleteMovie(Integer movieID){
+            //Delete in database.
+            try {
+                Connection connection = connect();
+                String sql = "delete from movie where id_movie = ?";
+                statement = connection.prepareStatement(sql);
+                statement.setInt(1, movieID);
+                statement.executeUpdate();
+                statement.close();
+                connection.close();
+                JOptionPane.showMessageDialog(null,"The register was deleted successfully","Deleted",JOptionPane.INFORMATION_MESSAGE);
+            }catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"An error occurred while deleting the register "+e,"Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }
 }

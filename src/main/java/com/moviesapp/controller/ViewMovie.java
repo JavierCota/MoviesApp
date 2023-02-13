@@ -1,5 +1,6 @@
 package com.moviesapp.controller;
 
+import com.moviesapp.model.crud.CRUDMovie;
 import com.moviesapp.model.internal.Movie;
 
 import javax.swing.*;
@@ -20,6 +21,7 @@ public class ViewMovie extends javax.swing.JFrame {
     private JButton viewMUpdateBtn;
     private JButton viewMDeleteBtn;
     private JLabel viewMovieID;
+    private CRUDMovie crudMovie = new CRUDMovie();
 
     public ViewMovie(Movie movie){
 
@@ -40,13 +42,25 @@ public class ViewMovie extends javax.swing.JFrame {
         viewMDirID.setText(movie.getDirectorID().toString());
         viewMStudioID.setText(movie.getStudioID().toString());
 
-
         viewMReturnBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MainView objMainView = new MainView();
                 frame.setContentPane(objMainView.getContentPane());
                 frame.dispose();
+            }
+        });
+
+        viewMDeleteBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this register?","Delete register", JOptionPane.YES_NO_OPTION);
+                if(reply == JOptionPane.YES_OPTION) {
+                    crudMovie.deleteMovie(movie.getMovieID());
+                    MainView objMainView = new MainView();
+                    frame.setContentPane(objMainView.getContentPane());
+                    frame.dispose();
+                }
             }
         });
     }
