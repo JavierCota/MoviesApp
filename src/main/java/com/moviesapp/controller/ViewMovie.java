@@ -1,8 +1,11 @@
 package com.moviesapp.controller;
 
+import com.moviesapp.model.crud.CRUDMovie;
+import com.moviesapp.model.internal.Movie;
+
 import javax.swing.*;
 
-public class ViewMovie {
+public class ViewMovie extends javax.swing.JFrame {
     private JTextField viewMName;
     private JPanel panel1;
     private JTextField viewMGenre;

@@ -92,7 +92,6 @@ public class MainView extends javax.swing.JFrame {
                 directorIn.setSelectedIndex(-1);
                 studioIn.setSelectedIndex(-1);
                 crudMovie.createMovie(newMovie);
-
             }
         });
 

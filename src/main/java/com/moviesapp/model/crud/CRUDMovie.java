@@ -38,4 +38,35 @@ public class CRUDMovie extends DBManager {
             JOptionPane.showMessageDialog(null, "Registration was not completed " + e, "Message", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    public Movie readMovie(String name) {
+        //Read from database.
+        //Change return type.
+        Movie movie = null;
+        try{
+            Connection connection = connect();
+            String sql = "select * from movie where name = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, name);
+            rs = statement.executeQuery();
+            while ((rs.next())){
+                movie = new Movie(
+                        rs.getString("name"),
+                        rs.getString("genre"),
+                        rs.getInt("duration_min"),
+                        rs.getString("classification"),
+                        rs.getDate("release_date"),
+                        rs.getString("description"),
+                        rs.getInt("id_director"),
+                        rs.getInt("id_studio"));
+            }
+            rs.close();
+            statement.close();
+            connection.close();
+            return movie;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error in system search " + e, "Search error", JOptionPane.ERROR_MESSAGE);
+            return movie;
+        }
+    }
 }
