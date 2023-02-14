@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CRUDMovie extends DBManager {
 
@@ -108,4 +110,34 @@ public class CRUDMovie extends DBManager {
                 JOptionPane.showMessageDialog(null,"An error occurred while deleting the register "+e,"Error",JOptionPane.ERROR_MESSAGE);
             }
         }
+
+    public List<Movie> movieList() {
+        Movie movie = null;
+        List<Movie> movieList = new ArrayList<>();
+        try{
+            Connection connection = connect();
+            String sql = "select * from movie";
+            statement = connection.prepareStatement(sql);
+            rs = statement.executeQuery();
+            while ((rs.next())){
+                movie = new Movie(rs.getString("name"),
+                        rs.getString("genre"),
+                        rs.getInt("duration_min"),
+                        rs.getString("classification"),
+                        rs.getDate("release_date"),
+                        rs.getString("description"),
+                        rs.getInt("id_movie"),
+                        rs.getInt("id_director"),
+                        rs.getInt("id_studio"));
+
+                movieList.add(movie);
+            }
+            rs.close();
+            statement.close();
+            connection.close();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Error in system search " + e, "Search error", JOptionPane.ERROR_MESSAGE);
+        }
+        return movieList;
+    }
 }
