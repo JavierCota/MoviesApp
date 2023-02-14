@@ -8,6 +8,7 @@ import com.moviesapp.model.external.Director;
 import com.moviesapp.model.external.Studio;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Comparator;
@@ -46,6 +47,9 @@ public class MainView extends javax.swing.JFrame {
     private JComboBox searchSelection;
     private JComboBox studioIn;
     private JComboBox directorIn;
+    private JTable movieListTable;
+    private JPanel movieListPanel;
+    private JTable movieTable;
     private CRUDMovie crudMovie = new CRUDMovie();
     private CRUDDirector crudDirector = new CRUDDirector();
     private CRUDStudio crudStudio = new CRUDStudio();
@@ -68,6 +72,13 @@ public class MainView extends javax.swing.JFrame {
 
         //Set studios in studioReg JComboBox
         studioJComboB(studioIn);
+
+        //Adds Movie List tab with MovieJTable
+        movieTable = movieJTable();
+        TableModel tableModel = movieTable.getModel();
+        movieListTable.setModel(tableModel);
+        //mainPanel.add("Movie List",movieTable);
+
 
         //Set options in searchSelection JComboBox
         searchSelection.addItem("Movie");
@@ -195,5 +206,24 @@ public class MainView extends javax.swing.JFrame {
     public Integer returnInt(String textWID){
         int id = Integer.parseInt(textWID.replaceAll("[\\D]", ""));
         return id;
+    }
+    public JTable movieJTable() {
+        String[][] movieArray;
+        List<com.moviesapp.model.internal.Movie> movieList;
+        movieList = crudMovie.movieList();
+        movieList.sort(Comparator.comparing(com.moviesapp.model.internal.Movie::getMovieName));
+        movieArray = movieList.stream().map(m -> new String[] {
+                m.getMovieName(),
+                m.getGenre(),
+                m.getDuration().toString(),
+                m.getClassification(),
+                m.getReleaseDate().toString(),
+                m.getDescription(),
+                m.getMovieID().toString(),
+                m.getDirectorID().toString(),
+                m.getStudioID().toString()}).toArray(String[][]::new);
+        String[] columnNames = {"Name","Genre","Duration","Classification","Release Date","Description","MovieID","DirectorID","StudioID"};
+        JTable movieTable = new JTable(movieArray,columnNames);
+        return movieTable;
     }
 }

@@ -125,7 +125,7 @@ public class CRUDMovie extends DBManager {
                         rs.getInt("duration_min"),
                         rs.getString("classification"),
                         rs.getDate("release_date"),
-                        rs.getString("description"),
+                        "",
                         rs.getInt("id_movie"),
                         rs.getInt("id_director"),
                         rs.getInt("id_studio"));
