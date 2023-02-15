@@ -11,9 +11,7 @@ import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class MainView extends javax.swing.JFrame {
     private JButton registerMovieButton;
@@ -53,6 +51,8 @@ public class MainView extends javax.swing.JFrame {
     private CRUDMovie crudMovie = new CRUDMovie();
     private CRUDDirector crudDirector = new CRUDDirector();
     private CRUDStudio crudStudio = new CRUDStudio();
+    private Map<Integer,String> directorsMap = crudDirector.readDirectorsID();
+    private Map<Integer,String> studiosMap = crudStudio.readStudiosID();
 
 
     public MainView() {
@@ -77,8 +77,6 @@ public class MainView extends javax.swing.JFrame {
         movieTable = movieJTable();
         TableModel tableModel = movieTable.getModel();
         movieListTable.setModel(tableModel);
-        //mainPanel.add("Movie List",movieTable);
-
 
         //Set options in searchSelection JComboBox
         searchSelection.addItem("Movie");
@@ -190,17 +188,17 @@ public class MainView extends javax.swing.JFrame {
         nationalityIn.setSelectedIndex(-1);
     }
     public void directorJComboB(JComboBox directorIn){
-        List<com.moviesapp.model.internal.Director> directorList;
-        directorList = crudDirector.directorList();
-        directorList.sort(Comparator.comparing(com.moviesapp.model.internal.Director::getDirectorName));
-        directorList.forEach(director -> directorIn.addItem(director.getDirectorName() + " " + director.getDirectorID()));
+        Set<Map.Entry<Integer,String>> set = directorsMap.entrySet();
+        List<Map.Entry<Integer,String>> directorList = new ArrayList<>(set);
+        directorList.sort(Comparator.comparing(Map.Entry::getValue));
+        directorList.forEach(d -> directorIn.addItem(d.getValue()+ " " + d.getKey()));
         directorIn.setSelectedIndex(-1);
     }
     public void studioJComboB(JComboBox studioIn){
-        List<com.moviesapp.model.internal.Studio> studioList;
-        studioList = crudStudio.studioList();
-        studioList.sort(Comparator.comparing(com.moviesapp.model.internal.Studio::getStudioName));
-        studioList.forEach(studio -> studioIn.addItem(studio.getStudioName() + " " + studio.getStudioID()));
+        Set<Map.Entry<Integer,String>> set = studiosMap.entrySet();
+        List<Map.Entry<Integer,String>> studioList = new ArrayList<>(set);
+        studioList.sort(Comparator.comparing(Map.Entry::getValue));
+        studioList.forEach(s -> studioIn.addItem(s.getValue()+ " " + s.getKey()));
         studioIn.setSelectedIndex(-1);
     }
     public Integer returnInt(String textWID){
@@ -220,9 +218,9 @@ public class MainView extends javax.swing.JFrame {
                 m.getReleaseDate().toString(),
                 m.getDescription(),
                 m.getMovieID().toString(),
-                m.getDirectorID().toString(),
-                m.getStudioID().toString()}).toArray(String[][]::new);
-        String[] columnNames = {"Name","Genre","Duration","Classification","Release Date","Description","MovieID","DirectorID","StudioID"};
+                directorsMap.get(m.getDirectorID()),
+                studiosMap.get(m.getStudioID())}).toArray(String[][]::new);
+        String[] columnNames = {"Name","Genre","Duration","Classification","Release Date","Description","MovieID","Director","Studio"};
         JTable movieTable = new JTable(movieArray,columnNames);
         return movieTable;
     }

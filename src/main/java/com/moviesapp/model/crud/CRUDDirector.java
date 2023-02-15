@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CRUDDirector extends DBManager {
 
@@ -104,20 +106,15 @@ public class CRUDDirector extends DBManager {
         }
     }
 
-    public List<Director> directorList(){
-        Director director = null;
-        List<Director> directorList = new ArrayList<Director>();
+    public Map<Integer,String> readDirectorsID(){
+        Map<Integer,String> directorMap = new HashMap<>();
         try {
             Connection connection = connect();
-            String sql = "select * from director";
+            String sql = "select id_director,name from director";
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             while ((rs.next())){
-                director = new Director(
-                        rs.getString("name"),rs.getDate("birth_date") ,"" ,"" ,"",
-                        rs.getInt("id_director"));
-
-                directorList.add(director);
+                directorMap.put(rs.getInt("id_director"),rs.getString("name"));
             }
             rs.close();
             statement.close();
@@ -125,8 +122,6 @@ public class CRUDDirector extends DBManager {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error in system search " + e, "Search error", JOptionPane.ERROR_MESSAGE);
         }
-        return directorList;
+        return directorMap;
     }
-    //Crear metodo que regrese lista de directores, guardar en mapa nombre y ID (Tambien para studio).
-    //Crear jcombobox en mainview movie para studio y director.
 }

@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CRUDStudio extends DBManager {
 
@@ -102,20 +104,15 @@ public class CRUDStudio extends DBManager {
             JOptionPane.showMessageDialog(null,"An error occurred while deleting the register "+e,"Error",JOptionPane.ERROR_MESSAGE);
         }
     }
-    public List<Studio> studioList(){
-        Studio studio = null;
-        List<Studio> studioList = new ArrayList<Studio>();
+    public Map<Integer,String> readStudiosID(){
+        Map<Integer,String> studioMap = new HashMap<>();
         try {
             Connection connection = connect();
-            String sql = "select * from studio";
+            String sql = "select id_studio,name from studio";
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             while ((rs.next())){
-                studio = new Studio(
-                        rs.getString("name"),"" ,rs.getDate("foundation") ,"" ,"",
-                        rs.getInt("id_studio"));
-
-                studioList.add(studio);
+                studioMap.put(rs.getInt("id_studio"),rs.getString("name"));
             }
             rs.close();
             statement.close();
@@ -123,6 +120,6 @@ public class CRUDStudio extends DBManager {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error in system search " + e, "Search error", JOptionPane.ERROR_MESSAGE);
         }
-        return studioList;
+        return studioMap;
     }
 }
