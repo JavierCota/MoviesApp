@@ -1,12 +1,13 @@
 package com.moviesapp;
 
 import com.moviesapp.controller.MainView;
-import com.moviesapp.model.util.DBManager;
+import java.util.logging.Logger;
 
 public class Main {
     private MainView view;
+    public static Logger LOGGER = Logger.getLogger(Main.class.getName());
     public static void main(String[] args) {
-        new DBManager().connect();
+        LOGGER.info("Starting application.");
         new MainView();
     }
 }

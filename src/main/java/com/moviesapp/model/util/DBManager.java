@@ -2,12 +2,14 @@ package com.moviesapp.model.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.logging.Logger;
 
 public class DBManager {
 
     private static String url = "jdbc:postgresql://localhost:5432/MovieApp";
     private static String user = "postgres";
     private static String pass = "jainek";
+    Logger LOGGER = Logger.getLogger(DBManager.class.getName());
 
     private static Connection connection;
 
@@ -15,9 +17,8 @@ public class DBManager {
         try{
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(url,user,pass);
-            System.out.println("Successful connection");
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            LOGGER.warning(e.getMessage());
         }
         return connection;
     }

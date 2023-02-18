@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class CRUDDirector extends DBManager {
 
+    Logger LOGGER = Logger.getLogger(CRUDDirector.class.getName());
     PreparedStatement statement;
     ResultSet rs;
 
@@ -100,8 +102,10 @@ public class CRUDDirector extends DBManager {
             statement.executeUpdate();
             statement.close();
             connection.close();
+            LOGGER.info("Director deleted successfully.");
             JOptionPane.showMessageDialog(null,"The register was deleted successfully","Deleted",JOptionPane.INFORMATION_MESSAGE);
         }catch (Exception e) {
+            LOGGER.warning(e.getMessage());
             JOptionPane.showMessageDialog(null,"An error occurred while deleting the register "+e,"Error",JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -119,7 +123,9 @@ public class CRUDDirector extends DBManager {
             rs.close();
             statement.close();
             connection.close();
+            LOGGER.info("Directors read successfully.");
         } catch (Exception e) {
+            LOGGER.warning(e.getMessage());
             JOptionPane.showMessageDialog(null, "Error in system search " + e, "Search error", JOptionPane.ERROR_MESSAGE);
         }
         return directorMap;

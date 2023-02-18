@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
+import java.util.logging.Logger;
 
 public class ViewDirector extends javax.swing.JFrame {
     private JTextField viewDName;
@@ -20,6 +21,7 @@ public class ViewDirector extends javax.swing.JFrame {
     private JButton viewDUpdateBtn;
     private JButton viewDDeleteButton;
     private CRUDDirector crudDirector = new CRUDDirector();
+    Logger LOGGER = Logger.getLogger(ViewDirector.class.getName());
 
     public ViewDirector(Director director) {
 
@@ -52,6 +54,7 @@ public class ViewDirector extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this register?","Delete register", JOptionPane.YES_NO_OPTION);
                 if(reply == JOptionPane.YES_OPTION) {
+                    LOGGER.info("Attempting to delete "+ director.getDirectorName()+ " ID: "+director.getDirectorID());
                     crudDirector.deleteDirector(director.getDirectorID());
                     MainView objMainView = new MainView();
                     frame.setContentPane(objMainView.getContentPane());

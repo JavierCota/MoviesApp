@@ -220,7 +220,7 @@ public class MainView extends javax.swing.JFrame {
                 m.getMovieID().toString(),
                 directorsMap.get(m.getDirectorID()),
                 studiosMap.get(m.getStudioID())}).toArray(String[][]::new);
-        String[] columnNames = {"Name","Genre","Duration","Classification","Release Date","Description","MovieID","Director","Studio"};
+        String[] columnNames = {"Name","Genre","Duration(min)","Classification","Release Date","Description","MovieID","Director","Studio"};
         JTable movieTable = new JTable(movieArray,columnNames);
         return movieTable;
     }
