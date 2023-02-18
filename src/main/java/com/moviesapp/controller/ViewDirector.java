@@ -52,10 +52,17 @@ public class ViewDirector extends javax.swing.JFrame {
         viewDDeleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this register?","Delete register", JOptionPane.YES_NO_OPTION);
-                if(reply == JOptionPane.YES_OPTION) {
-                    LOGGER.info("Attempting to delete "+ director.getDirectorName()+ " ID: "+director.getDirectorID());
-                    crudDirector.deleteDirector(director.getDirectorID());
+                int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this register?", "Delete register", JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION) {
+                    LOGGER.info("Attempting to delete " + director.getDirectorName() + " ID: " + director.getDirectorID());
+                    try {
+                        crudDirector.deleteDirector(director.getDirectorID());
+                        LOGGER.info("Director deleted successfully.");
+                        JOptionPane.showMessageDialog(null, "The register was deleted successfully", "Deleted", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception exception) {
+                        LOGGER.warning(exception.getMessage());
+                        JOptionPane.showMessageDialog(null, "An error occurred while deleting the register " + exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                     MainView objMainView = new MainView();
                     frame.setContentPane(objMainView.getContentPane());
                     frame.dispose();
@@ -65,8 +72,8 @@ public class ViewDirector extends javax.swing.JFrame {
         viewDUpdateBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to update this register?","Update register", JOptionPane.YES_NO_OPTION);
-                if(reply == JOptionPane.YES_OPTION) {
+                int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to update this register?", "Update register", JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION) {
                     java.sql.Date sqlDate = java.sql.Date.valueOf(viewDBirthday.getText());
                     director.setDirectorName(viewDName.getText());
                     director.setBirthDate(sqlDate);
@@ -78,7 +85,8 @@ public class ViewDirector extends javax.swing.JFrame {
             }
         });
     }
-    public void nationalityJComboB(JComboBox nationalityIn){
+
+    public void nationalityJComboB(JComboBox nationalityIn) {
         //Set nationalities in nationalityIn JComboBox
         String[] countries = Locale.getISOCountries();
         for (int i = 0; i < countries.length; i++) {
