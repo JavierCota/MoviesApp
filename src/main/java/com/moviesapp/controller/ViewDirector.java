@@ -74,13 +74,21 @@ public class ViewDirector extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to update this register?", "Update register", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
+                    LOGGER.info("Attempting to update " + director.getDirectorName() + " ID: " + director.getDirectorID());
                     java.sql.Date sqlDate = java.sql.Date.valueOf(viewDBirthday.getText());
                     director.setDirectorName(viewDName.getText());
                     director.setBirthDate(sqlDate);
                     director.setNationality(viewDNationality.getSelectedItem().toString());
                     director.setActiveYears(viewDActiveYears.getText());
                     director.setFavoriteGenre(viewDFavGenre.getText());
-                    crudDirector.updateDirector(director);
+                    try {
+                        crudDirector.updateDirector(director);
+                        LOGGER.info("Director updated successfully.");
+                        JOptionPane.showMessageDialog(null, "Register was updated successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception exception) {
+                        LOGGER.warning(exception.getMessage());
+                        JOptionPane.showMessageDialog(null, "Register was not updated " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });

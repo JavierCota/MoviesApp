@@ -1,6 +1,5 @@
 package com.moviesapp.model.crud;
 
-import com.moviesapp.model.internal.Director;
 import com.moviesapp.model.util.DBManager;
 import com.moviesapp.model.internal.Studio;
 
@@ -8,21 +7,21 @@ import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class CRUDStudio extends DBManager {
 
+    Logger LOGGER = Logger.getLogger(CRUDStudio.class.getName());
     PreparedStatement statement;
     ResultSet rs;
 
     public CRUDStudio() {
     }
 
-    public void createStudio(com.moviesapp.model.external.Studio studio) {
-        try {
+    public void createStudio(com.moviesapp.model.external.Studio studio) throws SQLException {
             Connection connection = connect();
             String sql = "insert into studio(name,industry,foundation,founder,headquarters) values(?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -34,10 +33,6 @@ public class CRUDStudio extends DBManager {
             statement.execute();
             statement.close();
             connection.close();
-            JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Registration was not completed " + e, "Message", JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     public Studio readStudio(String name) {
@@ -68,9 +63,9 @@ public class CRUDStudio extends DBManager {
             return studio;
         }
     }
-    public void updateStudio(Studio studio) {
+
+    public void updateStudio(Studio studio) throws SQLException {
         //Update in database.
-        try{
             Connection connection = connect();
             String sql = "update studio set name=?,industry=?,foundation=?,founder=?,headquarters=? where id_studio = ?";
             statement = connection.prepareStatement(sql);
@@ -83,15 +78,10 @@ public class CRUDStudio extends DBManager {
             statement.executeUpdate();
             statement.close();
             connection.close();
-            JOptionPane.showMessageDialog(null, "Register was updated successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Register was not updated " + e, "Message", JOptionPane.ERROR_MESSAGE);
-        }
     }
 
-    public void deleteStudio(Integer studioID) {
+    public void deleteStudio(Integer studioID) throws SQLException {
         //Delete in database.
-        try {
             Connection connection = connect();
             String sql = "delete from studio where id_studio = ?";
             statement = connection.prepareStatement(sql);
@@ -99,11 +89,8 @@ public class CRUDStudio extends DBManager {
             statement.executeUpdate();
             statement.close();
             connection.close();
-            JOptionPane.showMessageDialog(null,"The register was deleted successfully","Deleted",JOptionPane.INFORMATION_MESSAGE);
-        }catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"An error occurred while deleting the register "+e,"Error",JOptionPane.ERROR_MESSAGE);
-        }
     }
+
     public Map<Integer,String> readStudiosID(){
         Map<Integer,String> studioMap = new HashMap<>();
         try {
@@ -117,8 +104,10 @@ public class CRUDStudio extends DBManager {
             rs.close();
             statement.close();
             connection.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error in system search " + e, "Search error", JOptionPane.ERROR_MESSAGE);
+            LOGGER.info(studioMap.size() + " Studios read successfully.");
+        } catch (Exception exception) {
+            LOGGER.warning(exception.getMessage());
+            JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
         }
         return studioMap;
     }

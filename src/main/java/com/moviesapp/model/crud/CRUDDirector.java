@@ -22,8 +22,7 @@ public class CRUDDirector extends DBManager {
     }
 
     //Create, read, update, delete.
-    public void createDirector(com.moviesapp.model.external.Director director) {
-        try {
+    public void createDirector(com.moviesapp.model.external.Director director) throws SQLException {
             Connection connection = connect();
             String sql = "insert into director(name,birth_date,nationality,active_years,favorite_genre) values(?,?,?,?,?)";
             statement = connection.prepareStatement(sql);
@@ -35,10 +34,6 @@ public class CRUDDirector extends DBManager {
             statement.execute();
             statement.close();
             connection.close();
-            JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Registration was not completed " + e, "Message", JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     public Director readDirector(String name) {
@@ -70,9 +65,8 @@ public class CRUDDirector extends DBManager {
         }
     }
 
-    public void updateDirector(Director director) {
+    public void updateDirector(Director director) throws SQLException {
         //Update in database.
-        try{
             Connection connection = connect();
             String sql = "update director set name=?,birth_date=?,nationality=?,active_years=?,favorite_genre=? where id_director = ?";
             statement = connection.prepareStatement(sql);
@@ -85,10 +79,6 @@ public class CRUDDirector extends DBManager {
             statement.executeUpdate();
             statement.close();
             connection.close();
-            JOptionPane.showMessageDialog(null, "Register was updated successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Register was not updated " + e, "Message", JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     public void deleteDirector(Integer directorID) throws SQLException {
@@ -116,9 +106,9 @@ public class CRUDDirector extends DBManager {
             statement.close();
             connection.close();
             LOGGER.info(directorMap.size() + " Directors read successfully.");
-        } catch (Exception e) {
-            LOGGER.warning(e.getMessage());
-            JOptionPane.showMessageDialog(null, "Error in system search " + e, "Search error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception exception) {
+            LOGGER.warning(exception.getMessage());
+            JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
         }
         return directorMap;
     }

@@ -12,6 +12,7 @@ import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
+import java.util.logging.Logger;
 
 public class MainView extends javax.swing.JFrame {
     private JButton registerMovieButton;
@@ -53,6 +54,7 @@ public class MainView extends javax.swing.JFrame {
     private CRUDStudio crudStudio = new CRUDStudio();
     private Map<Integer,String> directorsMap = crudDirector.readDirectorsID();
     private Map<Integer,String> studiosMap = crudStudio.readStudiosID();
+    Logger LOGGER = Logger.getLogger(MainView.class.getName());
 
 
     public MainView() {
@@ -73,7 +75,7 @@ public class MainView extends javax.swing.JFrame {
         //Set studios in studioReg JComboBox
         studioJComboB(studioIn);
 
-        //Adds Movie List tab with MovieJTable
+        //Fills movieListTable with movies from DB
         movieTable = movieJTable();
         TableModel tableModel = movieTable.getModel();
         movieListTable.setModel(tableModel);
@@ -107,6 +109,7 @@ public class MainView extends javax.swing.JFrame {
         registerDirButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                LOGGER.info("Attempting to create a new director.");
                 java.sql.Date sqlDate = java.sql.Date.valueOf(birthDateIn.getText());
                 com.moviesapp.model.external.Director newDirector = new Director(
                         directorNameIn.getText(), sqlDate, (String) nationalityIn.getSelectedItem(), activeYearsIn.getText(), favoriteGenreIn.getText());
@@ -116,13 +119,21 @@ public class MainView extends javax.swing.JFrame {
                 nationalityIn.setSelectedIndex(-1);
                 activeYearsIn.setText("");
                 favoriteGenreIn.setText("");
-                crudDirector.createDirector(newDirector);
+                try{
+                    crudDirector.createDirector(newDirector);
+                    LOGGER.info("Director " + newDirector.getDirectorName() + " created successfully.");
+                    JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                }catch (Exception exception){
+                    LOGGER.warning(exception.getMessage());
+                    JOptionPane.showMessageDialog(null, "Registration was not completed " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
         registerStudioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                LOGGER.info("Attempting to create a new studio.");
                 java.sql.Date sqlDate = java.sql.Date.valueOf(studioFoundationIn.getText());
                 com.moviesapp.model.external.Studio newStudio = new Studio(
                         studioNameIn.getText(), studioIndustryIn.getText(), sqlDate, studioFounderIn.getText(), studioHQIn.getText());
@@ -132,7 +143,14 @@ public class MainView extends javax.swing.JFrame {
                 studioFoundationIn.setText("");
                 studioFounderIn.setText("");
                 studioHQIn.setText("");
-                crudStudio.createStudio(newStudio);
+                try{
+                    crudStudio.createStudio(newStudio);
+                    LOGGER.info("Studio " + newStudio.getStudioName() + " created successfully.");
+                    JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                }catch (Exception exception){
+                    LOGGER.warning(exception.getMessage());
+                    JOptionPane.showMessageDialog(null, "Registration was not completed " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
