@@ -6,6 +6,7 @@ import com.moviesapp.model.internal.Movie;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 public class ViewMovie extends javax.swing.JFrame {
     private JTextField viewMName;
@@ -22,6 +23,7 @@ public class ViewMovie extends javax.swing.JFrame {
     private JButton viewMDeleteBtn;
     private JLabel viewMovieID;
     private CRUDMovie crudMovie = new CRUDMovie();
+    Logger LOGGER = Logger.getLogger(ViewMovie.class.getName());
 
     public ViewMovie(Movie movie){
 
@@ -56,7 +58,15 @@ public class ViewMovie extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this register?","Delete register", JOptionPane.YES_NO_OPTION);
                 if(reply == JOptionPane.YES_OPTION) {
-                    crudMovie.deleteMovie(movie.getMovieID());
+                    LOGGER.info("Attempting to delete " + movie.getMovieName() + " ID: " + movie.getMovieID());
+                    try{
+                        crudMovie.deleteMovie(movie.getMovieID());
+                        LOGGER.info("Movie deleted successfully");
+                        JOptionPane.showMessageDialog(null,"The register was deleted successfully","Deleted",JOptionPane.INFORMATION_MESSAGE);
+                    }catch (Exception exception){
+                        LOGGER.warning(exception.getMessage());
+                        JOptionPane.showMessageDialog(null,"An error occurred while deleting the register "+exception.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+                    }
                     MainView objMainView = new MainView();
                     frame.setContentPane(objMainView.getContentPane());
                     frame.dispose();
@@ -69,6 +79,7 @@ public class ViewMovie extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to update this register?","Update register", JOptionPane.YES_NO_OPTION);
                 if(reply == JOptionPane.YES_OPTION) {
+                    LOGGER.info("Attempting to update " + movie.getMovieName() + " ID: " + movie.getMovieID());
                     java.sql.Date sqlDate = java.sql.Date.valueOf(viewMReleaseD.getText());
                     movie.setMovieName(viewMName.getText());
                     movie.setGenre(viewMGenre.getText());
@@ -76,7 +87,14 @@ public class ViewMovie extends javax.swing.JFrame {
                     movie.setClassification(viewMClassification.getText());
                     movie.setReleaseDate(sqlDate);
                     movie.setDescription(viewMDescription.getText());
-                    crudMovie.updateMovie(movie);
+                    try{
+                        crudMovie.updateMovie(movie);
+                        LOGGER.info("Movie updated successfully");
+                        JOptionPane.showMessageDialog(null, "Register was updated successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    }catch (Exception exception){
+                        LOGGER.warning(exception.getMessage());
+                        JOptionPane.showMessageDialog(null, "Register was not updated " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });

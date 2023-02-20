@@ -89,6 +89,7 @@ public class MainView extends javax.swing.JFrame {
         registerMovieButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                LOGGER.info("Attempting to create a new movie.");
                 java.sql.Date sqlDate = java.sql.Date.valueOf(releaseDateIn.getText());
                 com.moviesapp.model.external.Movie newMovie = new Movie(
                         movieNameIn.getText(), genreIn.getText(), Integer.parseInt(durationIn.getText()), classificationIn.getText(), sqlDate, descriptionIn.getText(),
@@ -102,7 +103,14 @@ public class MainView extends javax.swing.JFrame {
                 descriptionIn.setText("");
                 directorIn.setSelectedIndex(-1);
                 studioIn.setSelectedIndex(-1);
-                crudMovie.createMovie(newMovie);
+                try{
+                    crudMovie.createMovie(newMovie);
+                    LOGGER.info("Movie " + newMovie.getMovieName() + " created successfully.");
+                    JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                }catch (Exception exception){
+                    LOGGER.warning(exception.getMessage());
+                    JOptionPane.showMessageDialog(null, "Registration was not completed " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 

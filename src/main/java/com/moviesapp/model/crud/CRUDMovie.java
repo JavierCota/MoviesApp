@@ -7,11 +7,14 @@ import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class CRUDMovie extends DBManager {
 
+    Logger LOGGER = Logger.getLogger(CRUDMovie.class.getName());
     PreparedStatement statement;
     ResultSet rs;
 
@@ -19,8 +22,7 @@ public class CRUDMovie extends DBManager {
     }
 
     //Create, read, update, delete.
-    public void createMovie(com.moviesapp.model.external.Movie movie) {
-        try {
+    public void createMovie(com.moviesapp.model.external.Movie movie) throws SQLException {
             Connection connection = connect();
             String sql = "insert into movie(name,genre,duration_min,classification,release_date,description,id_director,id_studio) values(?,?,?,?,?,?,?,?)";
             statement = connection.prepareStatement(sql);
@@ -35,10 +37,6 @@ public class CRUDMovie extends DBManager {
             statement.execute();
             statement.close();
             connection.close();
-            JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Registration was not completed " + e, "Message", JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     public Movie readMovie(String name) {
@@ -73,9 +71,8 @@ public class CRUDMovie extends DBManager {
         }
     }
 
-    public void updateMovie(Movie movie) {
+    public void updateMovie(Movie movie) throws SQLException {
         //Update in database.
-        try{
             Connection connection = connect();
             String sql = "update movie set name=?,genre=?,duration_min=?,classification=?,release_date=?,description=? where id_movie = ?";
             statement = connection.prepareStatement(sql);
@@ -89,27 +86,18 @@ public class CRUDMovie extends DBManager {
             statement.executeUpdate();
             statement.close();
             connection.close();
-            JOptionPane.showMessageDialog(null, "Register was updated successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Register was not updated " + e, "Message", JOptionPane.ERROR_MESSAGE);
-        }
     }
 
-    public void deleteMovie(Integer movieID){
-            //Delete in database.
-            try {
-                Connection connection = connect();
-                String sql = "delete from movie where id_movie = ?";
-                statement = connection.prepareStatement(sql);
-                statement.setInt(1, movieID);
-                statement.executeUpdate();
-                statement.close();
-                connection.close();
-                JOptionPane.showMessageDialog(null,"The register was deleted successfully","Deleted",JOptionPane.INFORMATION_MESSAGE);
-            }catch (Exception e) {
-                JOptionPane.showMessageDialog(null,"An error occurred while deleting the register "+e,"Error",JOptionPane.ERROR_MESSAGE);
-            }
-        }
+    public void deleteMovie(Integer movieID) throws SQLException {
+        //Delete in database.
+        Connection connection = connect();
+        String sql = "delete from movie where id_movie = ?";
+        statement = connection.prepareStatement(sql);
+        statement.setInt(1, movieID);
+        statement.executeUpdate();
+        statement.close();
+        connection.close();
+    }
 
     public List<Movie> movieList() {
         Movie movie = null;
@@ -135,8 +123,10 @@ public class CRUDMovie extends DBManager {
             rs.close();
             statement.close();
             connection.close();
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error in system search " + e, "Search error", JOptionPane.ERROR_MESSAGE);
+            LOGGER.info(movieList.size() + "Movies read successfully.");
+        }catch (Exception exception){
+            LOGGER.warning(exception.getMessage());
+            JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
         }
         return movieList;
     }
