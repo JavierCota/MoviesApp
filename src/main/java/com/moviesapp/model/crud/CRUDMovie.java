@@ -39,11 +39,10 @@ public class CRUDMovie extends DBManager {
             connection.close();
     }
 
-    public Movie readMovie(String name) {
+    public Movie readMovie(String name) throws SQLException {
         //Read from database.
         //Change return type.
         Movie movie = null;
-        try{
             Connection connection = connect();
             String sql = "select * from movie where name = ?";
             statement = connection.prepareStatement(sql);
@@ -65,10 +64,6 @@ public class CRUDMovie extends DBManager {
             statement.close();
             connection.close();
             return movie;
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error in system search " + e, "Search error", JOptionPane.ERROR_MESSAGE);
-            return movie;
-        }
     }
 
     public void updateMovie(Movie movie) throws SQLException {
@@ -123,7 +118,7 @@ public class CRUDMovie extends DBManager {
             rs.close();
             statement.close();
             connection.close();
-            LOGGER.info(movieList.size() + "Movies read successfully.");
+            LOGGER.info(movieList.size() + " Movies read successfully.");
         }catch (Exception exception){
             LOGGER.warning(exception.getMessage());
             JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);

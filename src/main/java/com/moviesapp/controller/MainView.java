@@ -52,7 +52,7 @@ public class MainView extends javax.swing.JFrame {
     private CRUDMovie crudMovie = new CRUDMovie();
     private CRUDDirector crudDirector = new CRUDDirector();
     private CRUDStudio crudStudio = new CRUDStudio();
-    private Map<Integer,String> directorsMap = crudDirector.readDirectorsID();
+    private Map<Integer,String> directorsMap = crudDirector.readDirectorsID(); // TODO crear metodo con try catch y llamarlo aqui
     private Map<Integer,String> studiosMap = crudStudio.readStudiosID();
     Logger LOGGER = Logger.getLogger(MainView.class.getName());
 
@@ -91,6 +91,7 @@ public class MainView extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 LOGGER.info("Attempting to create a new movie.");
                 java.sql.Date sqlDate = java.sql.Date.valueOf(releaseDateIn.getText());
+                //TODO metodo valide name y ids no esten vacios - si estan bien creas movie si no no + e
                 com.moviesapp.model.external.Movie newMovie = new Movie(
                         movieNameIn.getText(), genreIn.getText(), Integer.parseInt(durationIn.getText()), classificationIn.getText(), sqlDate, descriptionIn.getText(),
                         returnInt((String) directorIn.getSelectedItem()), returnInt((String) studioIn.getSelectedItem()));
@@ -166,42 +167,74 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String search = nameSearch.getText();
+                LOGGER.info("Searching for " + searchSelection.getSelectedItem() + " " + search + ".");
                 if (searchSelection.getSelectedItem().equals("Movie")) {
-                    com.moviesapp.model.internal.Movie movie = crudMovie.readMovie(search);
-                    if (movie == null) {
-                        JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
-                        nameSearch.setText("");
-                    } else {
-                        ViewMovie objViewMovie = new ViewMovie(movie);
-                        mainFrame.setContentPane(objViewMovie.getContentPane());
-                        mainFrame.dispose();
+                    com.moviesapp.model.internal.Movie movie = null;
+                    try {
+                        movie = crudMovie.readMovie(search);
+                        if (movie == null) {
+                            LOGGER.warning(search + " was not found.");
+                            JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
+                            nameSearch.setText("");
+                        } else {
+                            LOGGER.info(search + " was found. Moving to View" + searchSelection.getSelectedItem() + ".");
+                            ViewMovie objViewMovie = new ViewMovie(movie);
+                            mainFrame.setContentPane(objViewMovie.getContentPane());
+                            mainFrame.dispose();
+                        }
+                    }catch (Exception exception){
+                        LOGGER.warning(exception.getMessage());
+                        JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 if (searchSelection.getSelectedItem().equals("Director")) {
-                    com.moviesapp.model.internal.Director director = crudDirector.readDirector(search);
-                    if (director == null) {
-                        JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
-                        nameSearch.setText("");
-                    } else {
-                        ViewDirector objViewDirector = new ViewDirector(director);
-                        mainFrame.setContentPane(objViewDirector.getContentPane());
-                        mainFrame.dispose();
+                    com.moviesapp.model.internal.Director director = null;
+                    try{
+                        director = crudDirector.readDirector(search);
+                        if (director == null) {
+                            LOGGER.warning(search + " was not found.");
+                            JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
+                            nameSearch.setText("");
+                        } else {
+                            LOGGER.info(search + " was found. Moving to View" + searchSelection.getSelectedItem() + ".");
+                            ViewDirector objViewDirector = new ViewDirector(director);
+                            mainFrame.setContentPane(objViewDirector.getContentPane());
+                            mainFrame.dispose();
+                        }
+                    }catch (Exception exception){
+                        LOGGER.warning(exception.getMessage());
+                        JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 if (searchSelection.getSelectedItem().equals("Studio")) {
-                    com.moviesapp.model.internal.Studio studio = crudStudio.readStudio(search);
-                    if (studio == null) {
-                        JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
-                        nameSearch.setText("");
-                    } else {
-                        ViewStudio objViewStudio = new ViewStudio(studio);
-                        mainFrame.setContentPane(objViewStudio.getContentPane());
-                        mainFrame.dispose();
+                    com.moviesapp.model.internal.Studio studio = null;
+                    try{
+                        studio = crudStudio.readStudio(search);
+                        if (studio == null) {
+                            LOGGER.warning(search + " was not found.");
+                            JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
+                            nameSearch.setText("");
+                        } else {
+                            LOGGER.info(search + " was found. Moving to View" + searchSelection.getSelectedItem() + ".");
+                            ViewStudio objViewStudio = new ViewStudio(studio);
+                            mainFrame.setContentPane(objViewStudio.getContentPane());
+                            mainFrame.dispose();
+                        }
+                    }catch (Exception exception){
+                        LOGGER.warning(exception.getMessage());
+                        JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
         });
     }
+    /*public void readDirectors(){
+        try {
+            crudDirector.readDirectorsID();
+        }catch (Exception exception){
+
+        }
+    }*/
     public void nationalityJComboB(JComboBox nationalityIn){
         //Set nationalities in nationalityIn JComboBox
         String[] countries = Locale.getISOCountries();

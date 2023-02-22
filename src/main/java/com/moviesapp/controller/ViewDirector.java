@@ -44,6 +44,7 @@ public class ViewDirector extends javax.swing.JFrame {
         viewDReturnBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                LOGGER.info("Returning to MainView.");
                 MainView objMainView = new MainView();
                 frame.setContentPane(objMainView.getContentPane());
                 frame.dispose();

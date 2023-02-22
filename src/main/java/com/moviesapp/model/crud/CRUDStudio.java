@@ -35,11 +35,10 @@ public class CRUDStudio extends DBManager {
             connection.close();
     }
 
-    public Studio readStudio(String name) {
+    public Studio readStudio(String name) throws SQLException {
         //Read from database.
         //Change return type.
         Studio studio = null;
-        try {
             Connection connection = connect();
             String sql = "select * from studio where name = ?";
             statement = connection.prepareStatement(sql);
@@ -58,10 +57,6 @@ public class CRUDStudio extends DBManager {
             statement.close();
             connection.close();
             return studio;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error in system search " + e, "Search error", JOptionPane.ERROR_MESSAGE);
-            return studio;
-        }
     }
 
     public void updateStudio(Studio studio) throws SQLException {

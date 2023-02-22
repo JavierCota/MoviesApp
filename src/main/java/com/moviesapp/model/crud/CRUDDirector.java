@@ -36,11 +36,10 @@ public class CRUDDirector extends DBManager {
             connection.close();
     }
 
-    public Director readDirector(String name) {
+    public Director readDirector(String name) throws SQLException {
         //Read from database.
         //Change return type.
         Director director = null;
-        try {
             Connection connection = connect();
             String sql = "select * from director where name = ?";
             statement = connection.prepareStatement(sql);
@@ -59,10 +58,6 @@ public class CRUDDirector extends DBManager {
             statement.close();
             connection.close();
             return director;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error in system search " + e, "Search error", JOptionPane.ERROR_MESSAGE);
-            return director;
-        }
     }
 
     public void updateDirector(Director director) throws SQLException {
