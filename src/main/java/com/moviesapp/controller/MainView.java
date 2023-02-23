@@ -6,11 +6,14 @@ import com.moviesapp.model.crud.CRUDStudio;
 import com.moviesapp.model.external.Movie;
 import com.moviesapp.model.external.Director;
 import com.moviesapp.model.external.Studio;
+import com.moviesapp.model.util.TextFieldValidations;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -50,6 +53,7 @@ public class MainView extends javax.swing.JFrame {
     private JPanel movieListPanel;
     private JTable movieTable;
     Logger LOGGER = Logger.getLogger(MainView.class.getName());
+    private TextFieldValidations validations = new TextFieldValidations();
     private CRUDMovie crudMovie = new CRUDMovie();
     private CRUDDirector crudDirector = new CRUDDirector();
     private CRUDStudio crudStudio = new CRUDStudio();
@@ -227,6 +231,21 @@ public class MainView extends javax.swing.JFrame {
                 }
             }
         });
+
+        //Validations for Movie tab.
+        validations.validateStringChars(movieNameIn);
+        validations.validateStringChars(genreIn);
+        validations.validateIntChars(durationIn);
+        validations.validateStringChars(classificationIn);
+        validations.validateDateChars(releaseDateIn);
+        validations.validateStringChars(descriptionIn);
+        validations.validateNameLength(movieNameIn);
+        validations.validateTextFLength(genreIn);
+        validations.validateIntDateLength(durationIn);
+        validations.validateTextFLength(classificationIn);
+        validations.validateIntDateLength(releaseDateIn);
+        validations.validateDescriptionLength(descriptionIn);
+
     }
 
     public Map<Integer, String> readDirectors() {
