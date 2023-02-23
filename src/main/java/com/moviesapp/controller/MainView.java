@@ -246,6 +246,31 @@ public class MainView extends javax.swing.JFrame {
         validations.validateIntDateLength(releaseDateIn);
         validations.validateDescriptionLength(descriptionIn);
 
+        //Validations for Director tab.
+        validations.validateStringChars(directorNameIn);
+        validations.validateDateChars(birthDateIn);
+        validations.validateStringChars(activeYearsIn);
+        validations.validateStringChars(favoriteGenreIn);
+        validations.validateNameLength(directorNameIn);
+        validations.validateIntDateLength(birthDateIn);
+        validations.validateTextFLength(activeYearsIn);
+        validations.validateTextFLength(favoriteGenreIn);
+
+        //Validations for Studio tab.
+        validations.validateStringChars(studioNameIn);
+        validations.validateStringChars(studioIndustryIn);
+        validations.validateDateChars(studioFoundationIn);
+        validations.validateStringChars(studioFounderIn);
+        validations.validateStringChars(studioHQIn);
+        validations.validateNameLength(studioNameIn);
+        validations.validateTextFLength(studioIndustryIn);
+        validations.validateIntDateLength(studioFoundationIn);
+        validations.validateTextFLength(studioFounderIn);
+        validations.validateTextFLength(studioHQIn);
+
+        //Validations for Search tab.
+        validations.validateStringChars(nameSearch);
+        validations.validateNameLength(nameSearch);
     }
 
     public Map<Integer, String> readDirectors() {
