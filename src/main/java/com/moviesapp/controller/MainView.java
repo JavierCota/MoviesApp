@@ -94,27 +94,31 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 LOGGER.info("Attempting to create a new movie.");
-                java.sql.Date sqlDate = java.sql.Date.valueOf(releaseDateIn.getText());
-                //TODO metodo valide name y ids no esten vacios - si estan bien creas movie si no no + e
-                com.moviesapp.model.external.Movie newMovie = new Movie(
-                        movieNameIn.getText(), genreIn.getText(), Integer.parseInt(durationIn.getText()), classificationIn.getText(), sqlDate, descriptionIn.getText(),
-                        returnInt((String) directorIn.getSelectedItem()), returnInt((String) studioIn.getSelectedItem()));
-                System.out.println(newMovie);
-                movieNameIn.setText("");
-                genreIn.setText("");
-                durationIn.setText("");
-                classificationIn.setText("");
-                releaseDateIn.setText("");
-                descriptionIn.setText("");
-                directorIn.setSelectedIndex(-1);
-                studioIn.setSelectedIndex(-1);
-                try {
-                    crudMovie.createMovie(newMovie);
-                    LOGGER.info("Movie " + newMovie.getMovieName() + " created successfully.");
-                    JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                } catch (Exception exception) {
-                    LOGGER.warning(exception.getMessage());
-                    JOptionPane.showMessageDialog(null, "Registration was not completed " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                if (movieNameIn.getText().isEmpty()||directorIn.getSelectedIndex()==-1|studioIn.getSelectedIndex()==-1) {
+                    LOGGER.warning("Unable to create movie. Either movieNameIn, directorIn, or studioIn is empty.");
+                    JOptionPane.showMessageDialog(null, "Please make sure Movie Name, Director, and Studio are not empty.", "Message", JOptionPane.ERROR_MESSAGE);
+                }else {
+                    java.sql.Date sqlDate = java.sql.Date.valueOf(releaseDateIn.getText());
+                    com.moviesapp.model.external.Movie newMovie = new Movie(
+                            movieNameIn.getText(), genreIn.getText(), Integer.parseInt(durationIn.getText()), classificationIn.getText(), sqlDate, descriptionIn.getText(),
+                            returnInt((String) directorIn.getSelectedItem()), returnInt((String) studioIn.getSelectedItem()));
+                    System.out.println(newMovie);
+                    movieNameIn.setText("");
+                    genreIn.setText("");
+                    durationIn.setText("");
+                    classificationIn.setText("");
+                    releaseDateIn.setText("");
+                    descriptionIn.setText("");
+                    directorIn.setSelectedIndex(-1);
+                    studioIn.setSelectedIndex(-1);
+                    try {
+                        crudMovie.createMovie(newMovie);
+                        LOGGER.info("Movie " + newMovie.getMovieName() + " created successfully.");
+                        JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception exception) {
+                        LOGGER.warning(exception.getMessage());
+                        JOptionPane.showMessageDialog(null, "Registration was not completed " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });
@@ -123,22 +127,27 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 LOGGER.info("Attempting to create a new director.");
-                java.sql.Date sqlDate = java.sql.Date.valueOf(birthDateIn.getText());
-                com.moviesapp.model.external.Director newDirector = new Director(
-                        directorNameIn.getText(), sqlDate, (String) nationalityIn.getSelectedItem(), activeYearsIn.getText(), favoriteGenreIn.getText());
-                System.out.println(newDirector);
-                directorNameIn.setText("");
-                birthDateIn.setText("");
-                nationalityIn.setSelectedIndex(-1);
-                activeYearsIn.setText("");
-                favoriteGenreIn.setText("");
-                try {
-                    crudDirector.createDirector(newDirector);
-                    LOGGER.info("Director " + newDirector.getDirectorName() + " created successfully.");
-                    JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                } catch (Exception exception) {
-                    LOGGER.warning(exception.getMessage());
-                    JOptionPane.showMessageDialog(null, "Registration was not completed " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                if (directorNameIn.getText().isEmpty()) {
+                    LOGGER.warning("Unable to create director, directorNameIn is empty.");
+                    JOptionPane.showMessageDialog(null, "Please make sure Director Name is not empty.", "Message", JOptionPane.ERROR_MESSAGE);
+                }else {
+                    java.sql.Date sqlDate = java.sql.Date.valueOf(birthDateIn.getText());
+                    com.moviesapp.model.external.Director newDirector = new Director(
+                            directorNameIn.getText(), sqlDate, (String) nationalityIn.getSelectedItem(), activeYearsIn.getText(), favoriteGenreIn.getText());
+                    System.out.println(newDirector);
+                    directorNameIn.setText("");
+                    birthDateIn.setText("");
+                    nationalityIn.setSelectedIndex(-1);
+                    activeYearsIn.setText("");
+                    favoriteGenreIn.setText("");
+                    try {
+                        crudDirector.createDirector(newDirector);
+                        LOGGER.info("Director " + newDirector.getDirectorName() + " created successfully.");
+                        JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception exception) {
+                        LOGGER.warning(exception.getMessage());
+                        JOptionPane.showMessageDialog(null, "Registration was not completed " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });
@@ -147,22 +156,27 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 LOGGER.info("Attempting to create a new studio.");
-                java.sql.Date sqlDate = java.sql.Date.valueOf(studioFoundationIn.getText());
-                com.moviesapp.model.external.Studio newStudio = new Studio(
-                        studioNameIn.getText(), studioIndustryIn.getText(), sqlDate, studioFounderIn.getText(), studioHQIn.getText());
-                System.out.println(newStudio);
-                studioNameIn.setText("");
-                studioIndustryIn.setText("");
-                studioFoundationIn.setText("");
-                studioFounderIn.setText("");
-                studioHQIn.setText("");
-                try {
-                    crudStudio.createStudio(newStudio);
-                    LOGGER.info("Studio " + newStudio.getStudioName() + " created successfully.");
-                    JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                } catch (Exception exception) {
-                    LOGGER.warning(exception.getMessage());
-                    JOptionPane.showMessageDialog(null, "Registration was not completed " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                if (studioNameIn.getText().isEmpty()) {
+                    LOGGER.warning("Unable to create studio, studioNameIn is empty.");
+                    JOptionPane.showMessageDialog(null, "Please make sure Studio Name is not empty.", "Message", JOptionPane.ERROR_MESSAGE);
+                }else {
+                    java.sql.Date sqlDate = java.sql.Date.valueOf(studioFoundationIn.getText());
+                    com.moviesapp.model.external.Studio newStudio = new Studio(
+                            studioNameIn.getText(), studioIndustryIn.getText(), sqlDate, studioFounderIn.getText(), studioHQIn.getText());
+                    System.out.println(newStudio);
+                    studioNameIn.setText("");
+                    studioIndustryIn.setText("");
+                    studioFoundationIn.setText("");
+                    studioFounderIn.setText("");
+                    studioHQIn.setText("");
+                    try {
+                        crudStudio.createStudio(newStudio);
+                        LOGGER.info("Studio " + newStudio.getStudioName() + " created successfully.");
+                        JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception exception) {
+                        LOGGER.warning(exception.getMessage());
+                        JOptionPane.showMessageDialog(null, "Registration was not completed " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });
@@ -170,63 +184,68 @@ public class MainView extends javax.swing.JFrame {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String search = nameSearch.getText();
-                LOGGER.info("Searching for " + searchSelection.getSelectedItem() + " " + search + ".");
-                if (searchSelection.getSelectedItem().equals("Movie")) {
-                    com.moviesapp.model.internal.Movie movie = null;
-                    try {
-                        movie = crudMovie.readMovie(search);
-                        if (movie == null) {
-                            LOGGER.warning(search + " was not found.");
-                            JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
-                            nameSearch.setText("");
-                        } else {
-                            LOGGER.info(search + " was found. Moving to View" + searchSelection.getSelectedItem() + ".");
-                            ViewMovie objViewMovie = new ViewMovie(movie);
-                            mainFrame.setContentPane(objViewMovie.getContentPane());
-                            mainFrame.dispose();
+                if (searchSelection.getSelectedIndex()==-1||nameSearch.getText().isEmpty()) {
+                    LOGGER.warning("Unable to search for register. Either searchSelection or nameSearch is empty.");
+                    JOptionPane.showMessageDialog(null, "Please make sure to fill out the empty fields.", "Message", JOptionPane.ERROR_MESSAGE);
+                }else {
+                    String search = nameSearch.getText();
+                    LOGGER.info("Searching for " + searchSelection.getSelectedItem() + " " + search + ".");
+                    if (searchSelection.getSelectedItem().equals("Movie")) {
+                        com.moviesapp.model.internal.Movie movie = null;
+                        try {
+                            movie = crudMovie.readMovie(search);
+                            if (movie == null) {
+                                LOGGER.warning(search + " was not found.");
+                                JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
+                                nameSearch.setText("");
+                            } else {
+                                LOGGER.info(search + " was found. Moving to View" + searchSelection.getSelectedItem() + ".");
+                                ViewMovie objViewMovie = new ViewMovie(movie);
+                                mainFrame.setContentPane(objViewMovie.getContentPane());
+                                mainFrame.dispose();
+                            }
+                        } catch (Exception exception) {
+                            LOGGER.warning(exception.getMessage());
+                            JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
                         }
-                    } catch (Exception exception) {
-                        LOGGER.warning(exception.getMessage());
-                        JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
                     }
-                }
-                if (searchSelection.getSelectedItem().equals("Director")) {
-                    com.moviesapp.model.internal.Director director = null;
-                    try {
-                        director = crudDirector.readDirector(search);
-                        if (director == null) {
-                            LOGGER.warning(search + " was not found.");
-                            JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
-                            nameSearch.setText("");
-                        } else {
-                            LOGGER.info(search + " was found. Moving to View" + searchSelection.getSelectedItem() + ".");
-                            ViewDirector objViewDirector = new ViewDirector(director);
-                            mainFrame.setContentPane(objViewDirector.getContentPane());
-                            mainFrame.dispose();
+                    if (searchSelection.getSelectedItem().equals("Director")) {
+                        com.moviesapp.model.internal.Director director = null;
+                        try {
+                            director = crudDirector.readDirector(search);
+                            if (director == null) {
+                                LOGGER.warning(search + " was not found.");
+                                JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
+                                nameSearch.setText("");
+                            } else {
+                                LOGGER.info(search + " was found. Moving to View" + searchSelection.getSelectedItem() + ".");
+                                ViewDirector objViewDirector = new ViewDirector(director);
+                                mainFrame.setContentPane(objViewDirector.getContentPane());
+                                mainFrame.dispose();
+                            }
+                        } catch (Exception exception) {
+                            LOGGER.warning(exception.getMessage());
+                            JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
                         }
-                    } catch (Exception exception) {
-                        LOGGER.warning(exception.getMessage());
-                        JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
                     }
-                }
-                if (searchSelection.getSelectedItem().equals("Studio")) {
-                    com.moviesapp.model.internal.Studio studio = null;
-                    try {
-                        studio = crudStudio.readStudio(search);
-                        if (studio == null) {
-                            LOGGER.warning(search + " was not found.");
-                            JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
-                            nameSearch.setText("");
-                        } else {
-                            LOGGER.info(search + " was found. Moving to View" + searchSelection.getSelectedItem() + ".");
-                            ViewStudio objViewStudio = new ViewStudio(studio);
-                            mainFrame.setContentPane(objViewStudio.getContentPane());
-                            mainFrame.dispose();
+                    if (searchSelection.getSelectedItem().equals("Studio")) {
+                        com.moviesapp.model.internal.Studio studio = null;
+                        try {
+                            studio = crudStudio.readStudio(search);
+                            if (studio == null) {
+                                LOGGER.warning(search + " was not found.");
+                                JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
+                                nameSearch.setText("");
+                            } else {
+                                LOGGER.info(search + " was found. Moving to View" + searchSelection.getSelectedItem() + ".");
+                                ViewStudio objViewStudio = new ViewStudio(studio);
+                                mainFrame.setContentPane(objViewStudio.getContentPane());
+                                mainFrame.dispose();
+                            }
+                        } catch (Exception exception) {
+                            LOGGER.warning(exception.getMessage());
+                            JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
                         }
-                    } catch (Exception exception) {
-                        LOGGER.warning(exception.getMessage());
-                        JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
