@@ -53,8 +53,8 @@ public class MainView extends javax.swing.JFrame {
     private CRUDMovie crudMovie = new CRUDMovie();
     private CRUDDirector crudDirector = new CRUDDirector();
     private CRUDStudio crudStudio = new CRUDStudio();
-    private Map<Integer,String> directorsMap = readDirectors();
-    private Map<Integer,String> studiosMap = readStudios();
+    private Map<Integer, String> directorsMap = readDirectors();
+    private Map<Integer, String> studiosMap = readStudios();
 
 
     public MainView() {
@@ -104,11 +104,11 @@ public class MainView extends javax.swing.JFrame {
                 descriptionIn.setText("");
                 directorIn.setSelectedIndex(-1);
                 studioIn.setSelectedIndex(-1);
-                try{
+                try {
                     crudMovie.createMovie(newMovie);
                     LOGGER.info("Movie " + newMovie.getMovieName() + " created successfully.");
                     JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                }catch (Exception exception){
+                } catch (Exception exception) {
                     LOGGER.warning(exception.getMessage());
                     JOptionPane.showMessageDialog(null, "Registration was not completed " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
                 }
@@ -128,11 +128,11 @@ public class MainView extends javax.swing.JFrame {
                 nationalityIn.setSelectedIndex(-1);
                 activeYearsIn.setText("");
                 favoriteGenreIn.setText("");
-                try{
+                try {
                     crudDirector.createDirector(newDirector);
                     LOGGER.info("Director " + newDirector.getDirectorName() + " created successfully.");
                     JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                }catch (Exception exception){
+                } catch (Exception exception) {
                     LOGGER.warning(exception.getMessage());
                     JOptionPane.showMessageDialog(null, "Registration was not completed " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
                 }
@@ -152,11 +152,11 @@ public class MainView extends javax.swing.JFrame {
                 studioFoundationIn.setText("");
                 studioFounderIn.setText("");
                 studioHQIn.setText("");
-                try{
+                try {
                     crudStudio.createStudio(newStudio);
                     LOGGER.info("Studio " + newStudio.getStudioName() + " created successfully.");
                     JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                }catch (Exception exception){
+                } catch (Exception exception) {
                     LOGGER.warning(exception.getMessage());
                     JOptionPane.showMessageDialog(null, "Registration was not completed " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
                 }
@@ -182,14 +182,14 @@ public class MainView extends javax.swing.JFrame {
                             mainFrame.setContentPane(objViewMovie.getContentPane());
                             mainFrame.dispose();
                         }
-                    }catch (Exception exception){
+                    } catch (Exception exception) {
                         LOGGER.warning(exception.getMessage());
                         JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 if (searchSelection.getSelectedItem().equals("Director")) {
                     com.moviesapp.model.internal.Director director = null;
-                    try{
+                    try {
                         director = crudDirector.readDirector(search);
                         if (director == null) {
                             LOGGER.warning(search + " was not found.");
@@ -201,14 +201,14 @@ public class MainView extends javax.swing.JFrame {
                             mainFrame.setContentPane(objViewDirector.getContentPane());
                             mainFrame.dispose();
                         }
-                    }catch (Exception exception){
+                    } catch (Exception exception) {
                         LOGGER.warning(exception.getMessage());
                         JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 if (searchSelection.getSelectedItem().equals("Studio")) {
                     com.moviesapp.model.internal.Studio studio = null;
-                    try{
+                    try {
                         studio = crudStudio.readStudio(search);
                         if (studio == null) {
                             LOGGER.warning(search + " was not found.");
@@ -220,7 +220,7 @@ public class MainView extends javax.swing.JFrame {
                             mainFrame.setContentPane(objViewStudio.getContentPane());
                             mainFrame.dispose();
                         }
-                    }catch (Exception exception){
+                    } catch (Exception exception) {
                         LOGGER.warning(exception.getMessage());
                         JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
                     }
@@ -228,29 +228,32 @@ public class MainView extends javax.swing.JFrame {
             }
         });
     }
-    public Map<Integer,String> readDirectors(){
-        Map <Integer,String> directorsMap = null;
+
+    public Map<Integer, String> readDirectors() {
+        Map<Integer, String> directorsMap = null;
         try {
             directorsMap = crudDirector.readDirectorsID();
             LOGGER.info(directorsMap.size() + " Directors read successfully.");
-        }catch (Exception exception){
+        } catch (Exception exception) {
             LOGGER.warning(exception.getMessage());
             JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
         }
         return directorsMap;
     }
-    public Map<Integer,String> readStudios(){
-        Map <Integer,String> studiosMap = null;
+
+    public Map<Integer, String> readStudios() {
+        Map<Integer, String> studiosMap = null;
         try {
             studiosMap = crudStudio.readStudiosID();
             LOGGER.info(studiosMap.size() + " Studios read successfully.");
-        }catch (Exception exception){
+        } catch (Exception exception) {
             LOGGER.warning(exception.getMessage());
             JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
         }
         return studiosMap;
     }
-    public void nationalityJComboB(JComboBox nationalityIn){
+
+    public void nationalityJComboB(JComboBox nationalityIn) {
         //Set nationalities in nationalityIn JComboBox
         String[] countries = Locale.getISOCountries();
         for (int i = 0; i < countries.length; i++) {
@@ -261,36 +264,40 @@ public class MainView extends javax.swing.JFrame {
         }
         nationalityIn.setSelectedIndex(-1);
     }
-    public void directorJComboB(JComboBox directorIn){
-        Set<Map.Entry<Integer,String>> set = directorsMap.entrySet();
-        List<Map.Entry<Integer,String>> directorList = new ArrayList<>(set);
+
+    public void directorJComboB(JComboBox directorIn) {
+        Set<Map.Entry<Integer, String>> set = directorsMap.entrySet();
+        List<Map.Entry<Integer, String>> directorList = new ArrayList<>(set);
         directorList.sort(Comparator.comparing(Map.Entry::getValue));
-        directorList.forEach(d -> directorIn.addItem(d.getValue()+ " " + d.getKey()));
+        directorList.forEach(d -> directorIn.addItem(d.getValue() + " " + d.getKey()));
         directorIn.setSelectedIndex(-1);
     }
-    public void studioJComboB(JComboBox studioIn){
-        Set<Map.Entry<Integer,String>> set = studiosMap.entrySet();
-        List<Map.Entry<Integer,String>> studioList = new ArrayList<>(set);
+
+    public void studioJComboB(JComboBox studioIn) {
+        Set<Map.Entry<Integer, String>> set = studiosMap.entrySet();
+        List<Map.Entry<Integer, String>> studioList = new ArrayList<>(set);
         studioList.sort(Comparator.comparing(Map.Entry::getValue));
-        studioList.forEach(s -> studioIn.addItem(s.getValue()+ " " + s.getKey()));
+        studioList.forEach(s -> studioIn.addItem(s.getValue() + " " + s.getKey()));
         studioIn.setSelectedIndex(-1);
     }
-    public Integer returnInt(String textWID){
+
+    public Integer returnInt(String textWID) {
         int id = Integer.parseInt(textWID.replaceAll("[\\D]", ""));
         return id;
     }
+
     public JTable movieJTable() {
         String[][] movieArray;
         List<com.moviesapp.model.internal.Movie> movieList = null;
         try {
             movieList = crudMovie.movieList();
             LOGGER.info(movieList.size() + " Movies read successfully.");
-        }catch(Exception exception){
+        } catch (Exception exception) {
             LOGGER.warning(exception.getMessage());
             JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
         }
         movieList.sort(Comparator.comparing(com.moviesapp.model.internal.Movie::getMovieName));
-        movieArray = movieList.stream().map(m -> new String[] {
+        movieArray = movieList.stream().map(m -> new String[]{
                 m.getMovieName(),
                 m.getGenre(),
                 m.getDuration().toString(),
@@ -300,8 +307,8 @@ public class MainView extends javax.swing.JFrame {
                 m.getMovieID().toString(),
                 directorsMap.get(m.getDirectorID()),
                 studiosMap.get(m.getStudioID())}).toArray(String[][]::new);
-        String[] columnNames = {"Name","Genre","Duration(min)","Classification","Release Date","Description","MovieID","Director","Studio"};
-        JTable movieTable = new JTable(movieArray,columnNames);
+        String[] columnNames = {"Name", "Genre", "Duration(min)", "Classification", "Release Date", "Description", "MovieID", "Director", "Studio"};
+        JTable movieTable = new JTable(movieArray, columnNames);
         return movieTable;
     }
 }
