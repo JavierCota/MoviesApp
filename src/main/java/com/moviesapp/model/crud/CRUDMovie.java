@@ -94,10 +94,9 @@ public class CRUDMovie extends DBManager {
         connection.close();
     }
 
-    public List<Movie> movieList() {
+    public List<Movie> movieList() throws SQLException {
         Movie movie = null;
         List<Movie> movieList = new ArrayList<>();
-        try{
             Connection connection = connect();
             String sql = "select * from movie";
             statement = connection.prepareStatement(sql);
@@ -118,11 +117,6 @@ public class CRUDMovie extends DBManager {
             rs.close();
             statement.close();
             connection.close();
-            LOGGER.info(movieList.size() + " Movies read successfully.");
-        }catch (Exception exception){
-            LOGGER.warning(exception.getMessage());
-            JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
-        }
         return movieList;
     }
 }

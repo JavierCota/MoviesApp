@@ -87,9 +87,8 @@ public class CRUDDirector extends DBManager {
             connection.close();
     }
 
-    public Map<Integer,String> readDirectorsID(){
+    public Map<Integer,String> readDirectorsID() throws SQLException{
         Map<Integer,String> directorMap = new HashMap<>();
-        try {
             Connection connection = connect();
             String sql = "select id_director,name from director";
             statement = connection.prepareStatement(sql);
@@ -100,11 +99,6 @@ public class CRUDDirector extends DBManager {
             rs.close();
             statement.close();
             connection.close();
-            LOGGER.info(directorMap.size() + " Directors read successfully.");
-        } catch (Exception exception) {
-            LOGGER.warning(exception.getMessage());
-            JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
-        }
         return directorMap;
     }
 }

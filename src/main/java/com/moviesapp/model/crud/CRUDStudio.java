@@ -86,9 +86,8 @@ public class CRUDStudio extends DBManager {
             connection.close();
     }
 
-    public Map<Integer,String> readStudiosID(){
+    public Map<Integer,String> readStudiosID() throws SQLException {
         Map<Integer,String> studioMap = new HashMap<>();
-        try {
             Connection connection = connect();
             String sql = "select id_studio,name from studio";
             statement = connection.prepareStatement(sql);
@@ -99,11 +98,6 @@ public class CRUDStudio extends DBManager {
             rs.close();
             statement.close();
             connection.close();
-            LOGGER.info(studioMap.size() + " Studios read successfully.");
-        } catch (Exception exception) {
-            LOGGER.warning(exception.getMessage());
-            JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
-        }
         return studioMap;
     }
 }

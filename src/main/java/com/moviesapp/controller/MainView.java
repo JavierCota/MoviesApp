@@ -49,12 +49,12 @@ public class MainView extends javax.swing.JFrame {
     private JTable movieListTable;
     private JPanel movieListPanel;
     private JTable movieTable;
+    Logger LOGGER = Logger.getLogger(MainView.class.getName());
     private CRUDMovie crudMovie = new CRUDMovie();
     private CRUDDirector crudDirector = new CRUDDirector();
     private CRUDStudio crudStudio = new CRUDStudio();
-    private Map<Integer,String> directorsMap = crudDirector.readDirectorsID(); // TODO crear metodo con try catch y llamarlo aqui
-    private Map<Integer,String> studiosMap = crudStudio.readStudiosID();
-    Logger LOGGER = Logger.getLogger(MainView.class.getName());
+    private Map<Integer,String> directorsMap = readDirectors();
+    private Map<Integer,String> studiosMap = readStudios();
 
 
     public MainView() {
@@ -228,13 +228,28 @@ public class MainView extends javax.swing.JFrame {
             }
         });
     }
-    /*public void readDirectors(){
+    public Map<Integer,String> readDirectors(){
+        Map <Integer,String> directorsMap = null;
         try {
-            crudDirector.readDirectorsID();
+            directorsMap = crudDirector.readDirectorsID();
+            LOGGER.info(directorsMap.size() + " Directors read successfully.");
         }catch (Exception exception){
-
+            LOGGER.warning(exception.getMessage());
+            JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
         }
-    }*/
+        return directorsMap;
+    }
+    public Map<Integer,String> readStudios(){
+        Map <Integer,String> studiosMap = null;
+        try {
+            studiosMap = crudStudio.readStudiosID();
+            LOGGER.info(studiosMap.size() + " Studios read successfully.");
+        }catch (Exception exception){
+            LOGGER.warning(exception.getMessage());
+            JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
+        }
+        return studiosMap;
+    }
     public void nationalityJComboB(JComboBox nationalityIn){
         //Set nationalities in nationalityIn JComboBox
         String[] countries = Locale.getISOCountries();
@@ -266,8 +281,14 @@ public class MainView extends javax.swing.JFrame {
     }
     public JTable movieJTable() {
         String[][] movieArray;
-        List<com.moviesapp.model.internal.Movie> movieList;
-        movieList = crudMovie.movieList();
+        List<com.moviesapp.model.internal.Movie> movieList = null;
+        try {
+            movieList = crudMovie.movieList();
+            LOGGER.info(movieList.size() + " Movies read successfully.");
+        }catch(Exception exception){
+            LOGGER.warning(exception.getMessage());
+            JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
+        }
         movieList.sort(Comparator.comparing(com.moviesapp.model.internal.Movie::getMovieName));
         movieArray = movieList.stream().map(m -> new String[] {
                 m.getMovieName(),
