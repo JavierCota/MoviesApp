@@ -2,6 +2,7 @@ package com.moviesapp.controller;
 
 import com.moviesapp.model.crud.CRUDDirector;
 import com.moviesapp.model.internal.Director;
+import com.moviesapp.model.util.TextFieldValidations;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,6 +21,7 @@ public class ViewDirector extends javax.swing.JFrame {
     private JPanel viewDPanel;
     private JButton viewDUpdateBtn;
     private JButton viewDDeleteButton;
+    private TextFieldValidations validations = new TextFieldValidations();
     private CRUDDirector crudDirector = new CRUDDirector();
     Logger LOGGER = Logger.getLogger(ViewDirector.class.getName());
 
@@ -76,23 +78,30 @@ public class ViewDirector extends javax.swing.JFrame {
                 int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to update this register?", "Update register", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
                     LOGGER.info("Attempting to update " + director.getDirectorName() + " ID: " + director.getDirectorID());
-                    java.sql.Date sqlDate = java.sql.Date.valueOf(viewDBirthday.getText());
-                    director.setDirectorName(viewDName.getText());
-                    director.setBirthDate(sqlDate);
-                    director.setNationality(viewDNationality.getSelectedItem().toString());
-                    director.setActiveYears(viewDActiveYears.getText());
-                    director.setFavoriteGenre(viewDFavGenre.getText());
-                    try {
-                        crudDirector.updateDirector(director);
-                        LOGGER.info("Director updated successfully.");
-                        JOptionPane.showMessageDialog(null, "Register was updated successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                    } catch (Exception exception) {
-                        LOGGER.warning(exception.getMessage());
-                        JOptionPane.showMessageDialog(null, "Register was not updated " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                    if (viewDName.getText().isEmpty()) {
+                        LOGGER.warning("Unable to update director, viewDName is empty.");
+                        JOptionPane.showMessageDialog(null, "Please make sure Name is not empty.", "Message", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        java.sql.Date sqlDate = java.sql.Date.valueOf(viewDBirthday.getText());
+                        director.setDirectorName(viewDName.getText());
+                        director.setBirthDate(sqlDate);
+                        director.setNationality(viewDNationality.getSelectedItem().toString());
+                        director.setActiveYears(viewDActiveYears.getText());
+                        director.setFavoriteGenre(viewDFavGenre.getText());
+                        try {
+                            crudDirector.updateDirector(director);
+                            LOGGER.info("Director updated successfully.");
+                            JOptionPane.showMessageDialog(null, "Register was updated successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                        } catch (Exception exception) {
+                            LOGGER.warning(exception.getMessage());
+                            JOptionPane.showMessageDialog(null, "Register was not updated " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 }
             }
         });
+
+        validateDirector(viewDName,viewDBirthday,viewDActiveYears,viewDFavGenre);
     }
 
     public void nationalityJComboB(JComboBox nationalityIn) {
@@ -105,5 +114,16 @@ public class ViewDirector extends javax.swing.JFrame {
             nationalityIn.addItem(countryName);
         }
         nationalityIn.setSelectedIndex(-1);
+    }
+
+    public void validateDirector(JTextField name, JTextField birthDate, JTextField activeYears, JTextField favoriteGenre) {
+        validations.validateStringChars(name);
+        validations.validateDateChars(birthDate);
+        validations.validateStringChars(activeYears);
+        validations.validateStringChars(favoriteGenre);
+        validations.validateNameLength(name);
+        validations.validateIntDateLength(birthDate);
+        validations.validateTextFLength(activeYears);
+        validations.validateTextFLength(favoriteGenre);
     }
 }
