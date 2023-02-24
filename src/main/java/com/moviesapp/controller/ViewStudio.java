@@ -2,6 +2,7 @@ package com.moviesapp.controller;
 
 import com.moviesapp.model.crud.CRUDStudio;
 import com.moviesapp.model.internal.Studio;
+import com.moviesapp.model.util.TextFieldValidations;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,6 +21,7 @@ public class ViewStudio extends javax.swing.JFrame {
     private JPanel viewSPanel;
     private JButton viewSUpdateBtn;
     private JButton viewSDeleteBtn;
+    private TextFieldValidations validations = new TextFieldValidations();
     private CRUDStudio crudStudio = new CRUDStudio();
     Logger LOGGER = Logger.getLogger(ViewStudio.class.getName());
 
@@ -74,22 +76,41 @@ public class ViewStudio extends javax.swing.JFrame {
                 int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to update this register?","Update register", JOptionPane.YES_NO_OPTION);
                 if(reply == JOptionPane.YES_OPTION) {
                     LOGGER.info("Attempting to update " + studio.getStudioName() + " ID: " + studio.getStudioID());
-                    java.sql.Date sqlDate = java.sql.Date.valueOf(viewSFoundation.getText());
-                    studio.setStudioName(viewSName.getText());
-                    studio.setIndustry(viewSIndustry.getText());
-                    studio.setFoundation(sqlDate);
-                    studio.setFounder(viewSFounder.getText());
-                    studio.setHeadquarters(viewSHQ.getText());
-                    try{
-                        crudStudio.updateStudio(studio);
-                        LOGGER.info("Studio updated successfully.");
-                        JOptionPane.showMessageDialog(null, "Register was updated successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                    }catch (Exception exception){
-                        LOGGER.warning(exception.getMessage());
-                        JOptionPane.showMessageDialog(null, "Register was not updated " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                    if (viewSName.getText().isEmpty()) {
+                        LOGGER.warning("Unable to update studio, viewSName is empty.");
+                        JOptionPane.showMessageDialog(null, "Please make sure Name is not empty.", "Message", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        java.sql.Date sqlDate = java.sql.Date.valueOf(viewSFoundation.getText());
+                        studio.setStudioName(viewSName.getText());
+                        studio.setIndustry(viewSIndustry.getText());
+                        studio.setFoundation(sqlDate);
+                        studio.setFounder(viewSFounder.getText());
+                        studio.setHeadquarters(viewSHQ.getText());
+                        try {
+                            crudStudio.updateStudio(studio);
+                            LOGGER.info("Studio updated successfully.");
+                            JOptionPane.showMessageDialog(null, "Register was updated successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                        } catch (Exception exception) {
+                            LOGGER.warning(exception.getMessage());
+                            JOptionPane.showMessageDialog(null, "Register was not updated " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 }
             }
         });
+
+        validateStudio(viewSName,viewSIndustry,viewSFoundation,viewSFounder,viewSHQ);
+    }
+    public void validateStudio(JTextField name, JTextField studioIndustry, JTextField studioFoundation, JTextField studioFounder, JTextField studioHQ) {
+        validations.validateStringChars(name);
+        validations.validateStringChars(studioIndustry);
+        validations.validateDateChars(studioFoundation);
+        validations.validateStringChars(studioFounder);
+        validations.validateStringChars(studioHQ);
+        validations.validateNameLength(name);
+        validations.validateTextFLength(studioIndustry);
+        validations.validateIntDateLength(studioFoundation);
+        validations.validateTextFLength(studioFounder);
+        validations.validateTextFLength(studioHQ);
     }
 }
