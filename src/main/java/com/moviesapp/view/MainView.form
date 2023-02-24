@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.moviesapp.controller.MainView">
+  <tabbedpane id="748fd" binding="mainPanel">
+    <constraints>
+      <xy x="20" y="20" width="578" height="339"/>
+    </constraints>
+    <properties>
+      <minimumSize width="282" height="339"/>
+      <preferredSize width="500" height="339"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="3b313" layout-manager="GridBagLayout">
+        <constraints>
+          <tabbedpane title="Movie"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="c97a8" layout-manager="GridLayoutManager" row-count="9" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="1.0" weighty="1.0"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="4d050" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Please fill out to register a new movie."/>
+                </properties>
+              </component>
+              <component id="eb8b8" class="javax.swing.JTextField" binding="descriptionIn">
+                <constraints>
+                  <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="591b4" class="javax.swing.JTextField" binding="releaseDateIn">
+                <constraints>
+                  <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="3b0fe" class="javax.swing.JTextField" binding="movieNameIn">
+                <constraints>
+                  <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="84464" class="javax.swing.JTextField" binding="genreIn">
+                <constraints>
+                  <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="d1282" class="javax.swing.JTextField" binding="durationIn">
+                <constraints>
+                  <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="f3f83" class="javax.swing.JTextField" binding="classificationIn">
+                <constraints>
+                  <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="3176c" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Movie Name"/>
+                </properties>
+              </component>
+              <component id="7f74" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Genre"/>
+                </properties>
+              </component>
+              <component id="865aa" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Duration(min)"/>
+                </properties>
+              </component>
+              <component id="12fb5" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Classification"/>
+                </properties>
+              </component>
+              <component id="fb084" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Release Date(yyyy-mm-dd)"/>
+                </properties>
+              </component>
+              <component id="7eabe" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Description"/>
+                </properties>
+              </component>
+              <component id="981eb" class="javax.swing.JComboBox" binding="studioIn">
+                <constraints>
+                  <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="918a0" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Studio"/>
+                </properties>
+              </component>
+              <component id="5143c" class="javax.swing.JComboBox" binding="directorIn">
+                <constraints>
+                  <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="714fd" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Director"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <component id="e3a73" class="javax.swing.JButton" binding="registerMovieButton">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="300" height="30"/>
+              </grid>
+              <gridbag weightx="1.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <horizontalAlignment value="0"/>
+              <text value="Register"/>
+            </properties>
+          </component>
+          <hspacer id="674e3">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </hspacer>
+          <hspacer id="d97d8">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </hspacer>
+          <vspacer id="66505">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </vspacer>
+        </children>
+      </grid>
+      <grid id="ec127" layout-manager="GridBagLayout">
+        <constraints>
+          <tabbedpane title="Director"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="3473b" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="1.0" weighty="1.0"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="7b283" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Please fill out to register a director."/>
+                </properties>
+              </component>
+              <component id="9ed01" class="javax.swing.JTextField" binding="directorNameIn">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="8e03b" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Director Name"/>
+                </properties>
+              </component>
+              <component id="b1e4f" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Nationality"/>
+                </properties>
+              </component>
+              <component id="75a6" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Active Years"/>
+                </properties>
+              </component>
+              <component id="5598c" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Favorite Genre"/>
+                </properties>
+              </component>
+              <component id="8af07" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Birth Date(yyyy-mm-dd)"/>
+                </properties>
+              </component>
+              <component id="8f738" class="javax.swing.JTextField" binding="birthDateIn">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="d65f9" class="javax.swing.JTextField" binding="activeYearsIn">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="14067" class="javax.swing.JTextField" binding="favoriteGenreIn">
+                <constraints>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="78538" class="javax.swing.JComboBox" binding="nationalityIn">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+              </component>
+            </children>
+          </grid>
+          <component id="9126a" class="javax.swing.JButton" binding="registerDirButton">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="1.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <text value="Register"/>
+            </properties>
+          </component>
+          <hspacer id="7c7e0">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </hspacer>
+          <hspacer id="b951a">
+            <constraints>
+              <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </hspacer>
+          <vspacer id="be520">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </vspacer>
+        </children>
+      </grid>
+      <grid id="3d18c" layout-manager="GridBagLayout">
+        <constraints>
+          <tabbedpane title="Studio"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="ee7df" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="1.0" weighty="1.0"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="4a89f" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Please fill out to register a studio."/>
+                </properties>
+              </component>
+              <component id="5b8d3" class="javax.swing.JTextField" binding="studioNameIn">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="b58cb" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Studio Name"/>
+                </properties>
+              </component>
+              <component id="7a998" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Foundation(yyyy-mm-dd)"/>
+                </properties>
+              </component>
+              <component id="80f81" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Founder"/>
+                </properties>
+              </component>
+              <component id="29c04" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Headquarters"/>
+                </properties>
+              </component>
+              <component id="2744d" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Industry"/>
+                </properties>
+              </component>
+              <component id="8b950" class="javax.swing.JTextField" binding="studioIndustryIn">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="b2049" class="javax.swing.JTextField" binding="studioFoundationIn">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="357a0" class="javax.swing.JTextField" binding="studioFounderIn">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="f0a87" class="javax.swing.JTextField" binding="studioHQIn">
+                <constraints>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+            </children>
+          </grid>
+          <component id="4ed40" class="javax.swing.JButton" binding="registerStudioButton">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="1.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <text value="Register"/>
+            </properties>
+          </component>
+          <hspacer id="71360">
+            <constraints>
+              <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </hspacer>
+          <hspacer id="6736c">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </hspacer>
+          <vspacer id="164b8">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </vspacer>
+        </children>
+      </grid>
+      <grid id="bd02a" layout-manager="GridBagLayout">
+        <constraints>
+          <tabbedpane title="Search "/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="e868d" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="1.0" weighty="1.0"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="8707e" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Search for movies, directors, studios."/>
+                </properties>
+              </component>
+              <component id="2428d" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Introduce name"/>
+                </properties>
+              </component>
+              <component id="f9252" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Please select"/>
+                </properties>
+              </component>
+              <component id="a0705" class="javax.swing.JTextField" binding="nameSearch">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="c8c3" class="javax.swing.JComboBox" binding="searchSelection">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+              </component>
+            </children>
+          </grid>
+          <component id="d8ef7" class="javax.swing.JButton" binding="searchButton">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="300" height="30"/>
+              </grid>
+              <gridbag weightx="1.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <horizontalAlignment value="0"/>
+              <text value="Search"/>
+            </properties>
+          </component>
+          <hspacer id="b84bc">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </hspacer>
+          <hspacer id="5efdc">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </hspacer>
+          <vspacer id="9b7e1">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </vspacer>
+        </children>
+      </grid>
+      <grid id="5a5de" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <tabbedpane title="Movie List"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="c6a86" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="1bdfc" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="In this tab you can look at all of our movies."/>
+                </properties>
+              </component>
+              <scrollpane id="4d25f">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="4b184" class="javax.swing.JTable" binding="movieListTable">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
+              <hspacer id="bb27f">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="9f38c">
+                <constraints>
+                  <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+            </children>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </tabbedpane>
+</form>
