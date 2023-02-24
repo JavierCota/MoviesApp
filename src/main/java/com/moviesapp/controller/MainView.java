@@ -12,8 +12,6 @@ import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -252,44 +250,56 @@ public class MainView extends javax.swing.JFrame {
         });
 
         //Validations for Movie tab.
-        validations.validateStringChars(movieNameIn);
-        validations.validateStringChars(genreIn);
-        validations.validateIntChars(durationIn);
-        validations.validateStringChars(classificationIn);
-        validations.validateDateChars(releaseDateIn);
-        validations.validateStringChars(descriptionIn);
-        validations.validateNameLength(movieNameIn);
-        validations.validateTextFLength(genreIn);
-        validations.validateIntDateLength(durationIn);
-        validations.validateTextFLength(classificationIn);
-        validations.validateIntDateLength(releaseDateIn);
-        validations.validateDescriptionLength(descriptionIn);
+        validateMovie(movieNameIn,genreIn,durationIn,classificationIn,releaseDateIn,descriptionIn);
 
         //Validations for Director tab.
-        validations.validateStringChars(directorNameIn);
-        validations.validateDateChars(birthDateIn);
-        validations.validateStringChars(activeYearsIn);
-        validations.validateStringChars(favoriteGenreIn);
-        validations.validateNameLength(directorNameIn);
-        validations.validateIntDateLength(birthDateIn);
-        validations.validateTextFLength(activeYearsIn);
-        validations.validateTextFLength(favoriteGenreIn);
+        validateDirector(directorNameIn,birthDateIn,activeYearsIn,favoriteGenreIn);
 
         //Validations for Studio tab.
-        validations.validateStringChars(studioNameIn);
-        validations.validateStringChars(studioIndustryIn);
-        validations.validateDateChars(studioFoundationIn);
-        validations.validateStringChars(studioFounderIn);
-        validations.validateStringChars(studioHQIn);
-        validations.validateNameLength(studioNameIn);
-        validations.validateTextFLength(studioIndustryIn);
-        validations.validateIntDateLength(studioFoundationIn);
-        validations.validateTextFLength(studioFounderIn);
-        validations.validateTextFLength(studioHQIn);
+        validateStudio(studioNameIn,studioIndustryIn,studioFoundationIn,studioFounderIn,studioHQIn);
 
         //Validations for Search tab.
         validations.validateStringChars(nameSearch);
         validations.validateNameLength(nameSearch);
+    }
+
+    public void validateMovie(JTextField name, JTextField genre, JTextField duration, JTextField classification, JTextField releaseDate, JTextField description) {
+        validations.validateStringChars(name);
+        validations.validateStringChars(genre);
+        validations.validateIntChars(duration);
+        validations.validateStringChars(classification);
+        validations.validateDateChars(releaseDate);
+        validations.validateStringChars(description);
+        validations.validateNameLength(name);
+        validations.validateTextFLength(genre);
+        validations.validateIntDateLength(duration);
+        validations.validateTextFLength(classification);
+        validations.validateIntDateLength(releaseDate);
+        validations.validateDescriptionLength(description);
+    }
+
+    public void validateDirector(JTextField name, JTextField birthDate, JTextField activeYears, JTextField favoriteGenre) {
+        validations.validateStringChars(name);
+        validations.validateDateChars(birthDate);
+        validations.validateStringChars(activeYears);
+        validations.validateStringChars(favoriteGenre);
+        validations.validateNameLength(name);
+        validations.validateIntDateLength(birthDate);
+        validations.validateTextFLength(activeYears);
+        validations.validateTextFLength(favoriteGenre);
+    }
+
+    public void validateStudio(JTextField name, JTextField studioIndustry, JTextField studioFoundation, JTextField studioFounder, JTextField studioHQ) {
+        validations.validateStringChars(name);
+        validations.validateStringChars(studioIndustry);
+        validations.validateDateChars(studioFoundation);
+        validations.validateStringChars(studioFounder);
+        validations.validateStringChars(studioHQ);
+        validations.validateNameLength(name);
+        validations.validateTextFLength(studioIndustry);
+        validations.validateIntDateLength(studioFoundation);
+        validations.validateTextFLength(studioFounder);
+        validations.validateTextFLength(studioHQ);
     }
 
     public Map<Integer, String> readDirectors() {
