@@ -6,7 +6,7 @@ import com.moviesapp.model.crud.CRUDStudio;
 import com.moviesapp.model.external.Movie;
 import com.moviesapp.model.external.Director;
 import com.moviesapp.model.external.Studio;
-import com.moviesapp.model.util.TextFieldValidations;
+import com.moviesapp.util.TextFieldValidations;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
@@ -17,15 +17,12 @@ import java.util.logging.Logger;
 
 public class MainView extends javax.swing.JFrame {
     private JButton registerMovieButton;
-    private JLabel label1;
-    private JPanel panel1;
     private JTextField descriptionIn;
     private JTextField releaseDateIn;
     private JTextField movieNameIn;
     private JTextField genreIn;
     private JTextField durationIn;
     private JTextField classificationIn;
-    private JPanel registerPanel;
     private JTabbedPane mainPanel;
     private JTextField nameSearch;
     private JButton searchButton;
@@ -34,23 +31,19 @@ public class MainView extends javax.swing.JFrame {
     private JComboBox nationalityIn;
     private JTextField activeYearsIn;
     private JTextField favoriteGenreIn;
-    private JPanel searchPanel;
-    private JPanel directorRSPanel;
     private JButton registerDirButton;
     private JTextField studioNameIn;
     private JTextField studioIndustryIn;
     private JTextField studioFoundationIn;
     private JTextField studioFounderIn;
     private JTextField studioHQIn;
-    private JPanel studioRSPanel;
     private JButton registerStudioButton;
     private JComboBox searchSelection;
     private JComboBox studioIn;
     private JComboBox directorIn;
     private JTable movieListTable;
-    private JPanel movieListPanel;
     private JTable movieTable;
-    Logger LOGGER = Logger.getLogger(MainView.class.getName());
+    private Logger LOGGER = Logger.getLogger(MainView.class.getName());
     private TextFieldValidations validations = new TextFieldValidations();
     private CRUDMovie crudMovie = new CRUDMovie();
     private CRUDDirector crudDirector = new CRUDDirector();
@@ -92,10 +85,10 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 LOGGER.info("Attempting to create a new movie.");
-                if (movieNameIn.getText().isEmpty()||directorIn.getSelectedIndex()==-1|studioIn.getSelectedIndex()==-1) {
+                if (movieNameIn.getText().isEmpty() || directorIn.getSelectedIndex() == -1 | studioIn.getSelectedIndex() == -1) {
                     LOGGER.warning("Unable to create movie. Either movieNameIn, directorIn, or studioIn is empty.");
                     JOptionPane.showMessageDialog(null, "Please make sure Movie Name, Director, and Studio are not empty.", "Message", JOptionPane.ERROR_MESSAGE);
-                }else {
+                } else {
                     java.sql.Date sqlDate = java.sql.Date.valueOf(releaseDateIn.getText());
                     com.moviesapp.model.external.Movie newMovie = new Movie(
                             movieNameIn.getText(), genreIn.getText(), Integer.parseInt(durationIn.getText()), classificationIn.getText(), sqlDate, descriptionIn.getText(),
@@ -128,7 +121,7 @@ public class MainView extends javax.swing.JFrame {
                 if (directorNameIn.getText().isEmpty()) {
                     LOGGER.warning("Unable to create director, directorNameIn is empty.");
                     JOptionPane.showMessageDialog(null, "Please make sure Director Name is not empty.", "Message", JOptionPane.ERROR_MESSAGE);
-                }else {
+                } else {
                     java.sql.Date sqlDate = java.sql.Date.valueOf(birthDateIn.getText());
                     com.moviesapp.model.external.Director newDirector = new Director(
                             directorNameIn.getText(), sqlDate, (String) nationalityIn.getSelectedItem(), activeYearsIn.getText(), favoriteGenreIn.getText());
@@ -157,7 +150,7 @@ public class MainView extends javax.swing.JFrame {
                 if (studioNameIn.getText().isEmpty()) {
                     LOGGER.warning("Unable to create studio, studioNameIn is empty.");
                     JOptionPane.showMessageDialog(null, "Please make sure Studio Name is not empty.", "Message", JOptionPane.ERROR_MESSAGE);
-                }else {
+                } else {
                     java.sql.Date sqlDate = java.sql.Date.valueOf(studioFoundationIn.getText());
                     com.moviesapp.model.external.Studio newStudio = new Studio(
                             studioNameIn.getText(), studioIndustryIn.getText(), sqlDate, studioFounderIn.getText(), studioHQIn.getText());
@@ -182,10 +175,10 @@ public class MainView extends javax.swing.JFrame {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (searchSelection.getSelectedIndex()==-1||nameSearch.getText().isEmpty()) {
+                if (searchSelection.getSelectedIndex() == -1 || nameSearch.getText().isEmpty()) {
                     LOGGER.warning("Unable to search for register. Either searchSelection or nameSearch is empty.");
                     JOptionPane.showMessageDialog(null, "Please make sure to fill out the empty fields.", "Message", JOptionPane.ERROR_MESSAGE);
-                }else {
+                } else {
                     String search = nameSearch.getText();
                     LOGGER.info("Searching for " + searchSelection.getSelectedItem() + " " + search + ".");
                     if (searchSelection.getSelectedItem().equals("Movie")) {
@@ -250,13 +243,13 @@ public class MainView extends javax.swing.JFrame {
         });
 
         //Validations for Movie tab.
-        validateMovie(movieNameIn,genreIn,durationIn,classificationIn,releaseDateIn,descriptionIn);
+        validateMovie(movieNameIn, genreIn, durationIn, classificationIn, releaseDateIn, descriptionIn);
 
         //Validations for Director tab.
-        validateDirector(directorNameIn,birthDateIn,activeYearsIn,favoriteGenreIn);
+        validateDirector(directorNameIn, birthDateIn, activeYearsIn, favoriteGenreIn);
 
         //Validations for Studio tab.
-        validateStudio(studioNameIn,studioIndustryIn,studioFoundationIn,studioFounderIn,studioHQIn);
+        validateStudio(studioNameIn, studioIndustryIn, studioFoundationIn, studioFounderIn, studioHQIn);
 
         //Validations for Search tab.
         validations.validateStringChars(nameSearch);

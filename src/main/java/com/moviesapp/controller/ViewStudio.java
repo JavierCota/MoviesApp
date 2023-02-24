@@ -2,7 +2,7 @@ package com.moviesapp.controller;
 
 import com.moviesapp.model.crud.CRUDStudio;
 import com.moviesapp.model.internal.Studio;
-import com.moviesapp.model.util.TextFieldValidations;
+import com.moviesapp.util.TextFieldValidations;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 
 public class ViewStudio extends javax.swing.JFrame {
     private JTextField viewSName;
-    private JPanel panel1;
     private JTextField viewSIndustry;
     private JTextField viewSFoundation;
     private JTextField viewSFounder;
@@ -23,7 +22,7 @@ public class ViewStudio extends javax.swing.JFrame {
     private JButton viewSDeleteBtn;
     private TextFieldValidations validations = new TextFieldValidations();
     private CRUDStudio crudStudio = new CRUDStudio();
-    Logger LOGGER = Logger.getLogger(ViewStudio.class.getName());
+    private Logger LOGGER = Logger.getLogger(ViewStudio.class.getName());
 
     public ViewStudio(Studio studio) {
 
@@ -53,16 +52,16 @@ public class ViewStudio extends javax.swing.JFrame {
         viewSDeleteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this register?","Delete register", JOptionPane.YES_NO_OPTION);
-                if(reply == JOptionPane.YES_OPTION) {
+                int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this register?", "Delete register", JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION) {
                     LOGGER.info("Attempting to delete " + studio.getStudioName() + " ID: " + studio.getStudioID());
-                    try{
+                    try {
                         crudStudio.deleteStudio(studio.getStudioID());
                         LOGGER.info("Studio deleted successfully.");
-                        JOptionPane.showMessageDialog(null,"The register was deleted successfully","Deleted",JOptionPane.INFORMATION_MESSAGE);
-                    }catch (Exception exception){
+                        JOptionPane.showMessageDialog(null, "The register was deleted successfully", "Deleted", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception exception) {
                         LOGGER.warning(exception.getMessage());
-                        JOptionPane.showMessageDialog(null,"An error occurred while deleting the register "+exception.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "An error occurred while deleting the register " + exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
                     MainView objMainView = new MainView();
                     frame.setContentPane(objMainView.getContentPane());
@@ -73,8 +72,8 @@ public class ViewStudio extends javax.swing.JFrame {
         viewSUpdateBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to update this register?","Update register", JOptionPane.YES_NO_OPTION);
-                if(reply == JOptionPane.YES_OPTION) {
+                int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to update this register?", "Update register", JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION) {
                     LOGGER.info("Attempting to update " + studio.getStudioName() + " ID: " + studio.getStudioID());
                     if (viewSName.getText().isEmpty()) {
                         LOGGER.warning("Unable to update studio, viewSName is empty.");
@@ -99,8 +98,9 @@ public class ViewStudio extends javax.swing.JFrame {
             }
         });
 
-        validateStudio(viewSName,viewSIndustry,viewSFoundation,viewSFounder,viewSHQ);
+        validateStudio(viewSName, viewSIndustry, viewSFoundation, viewSFounder, viewSHQ);
     }
+
     public void validateStudio(JTextField name, JTextField studioIndustry, JTextField studioFoundation, JTextField studioFounder, JTextField studioHQ) {
         validations.validateStringChars(name);
         validations.validateStringChars(studioIndustry);

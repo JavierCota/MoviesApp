@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 public class Main {
     private MainView view;
-    public static Logger LOGGER = Logger.getLogger(Main.class.getName());
+    private static Logger LOGGER = Logger.getLogger(Main.class.getName());
     public static void main(String[] args) {
         LOGGER.info("Starting application.");
         new MainView();

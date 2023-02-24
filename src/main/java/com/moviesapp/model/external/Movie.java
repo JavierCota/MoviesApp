@@ -1,8 +1,8 @@
 package com.moviesapp.model.external;
 
 import java.sql.Date;
-import java.util.List;
 import java.util.Objects;
+
 public class Movie {
     private String movieName;
     private String genre;
@@ -71,6 +71,7 @@ public class Movie {
     public void setDescription(String description) {
         this.description = description;
     }
+
     public Integer getDirectorID() {
         return directorID;
     }

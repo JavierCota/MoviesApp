@@ -2,7 +2,7 @@ package com.moviesapp.controller;
 
 import com.moviesapp.model.crud.CRUDMovie;
 import com.moviesapp.model.internal.Movie;
-import com.moviesapp.model.util.TextFieldValidations;
+import com.moviesapp.util.TextFieldValidations;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -25,7 +25,7 @@ public class ViewMovie extends javax.swing.JFrame {
     private JLabel viewMovieID;
     private TextFieldValidations validations = new TextFieldValidations();
     private CRUDMovie crudMovie = new CRUDMovie();
-    Logger LOGGER = Logger.getLogger(ViewMovie.class.getName());
+    private Logger LOGGER = Logger.getLogger(ViewMovie.class.getName());
 
     public ViewMovie(Movie movie) {
 

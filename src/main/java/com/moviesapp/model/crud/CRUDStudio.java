@@ -1,22 +1,19 @@
 package com.moviesapp.model.crud;
 
-import com.moviesapp.model.util.DBManager;
+import com.moviesapp.util.DBManager;
 import com.moviesapp.model.internal.Studio;
 
-import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 public class CRUDStudio extends DBManager {
 
-    Logger LOGGER = Logger.getLogger(CRUDStudio.class.getName());
-    PreparedStatement statement;
-    ResultSet rs;
+    private PreparedStatement statement;
+    private ResultSet rs;
 
     public CRUDStudio() {
     }

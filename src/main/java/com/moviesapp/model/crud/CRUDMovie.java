@@ -1,22 +1,19 @@
 package com.moviesapp.model.crud;
 
-import com.moviesapp.model.util.DBManager;
+import com.moviesapp.util.DBManager;
 import com.moviesapp.model.internal.Movie;
 
-import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class CRUDMovie extends DBManager {
 
-    Logger LOGGER = Logger.getLogger(CRUDMovie.class.getName());
-    PreparedStatement statement;
-    ResultSet rs;
+    private PreparedStatement statement;
+    private ResultSet rs;
 
     public CRUDMovie(){
     }

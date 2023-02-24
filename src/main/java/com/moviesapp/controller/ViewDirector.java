@@ -2,7 +2,7 @@ package com.moviesapp.controller;
 
 import com.moviesapp.model.crud.CRUDDirector;
 import com.moviesapp.model.internal.Director;
-import com.moviesapp.model.util.TextFieldValidations;
+import com.moviesapp.util.TextFieldValidations;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -23,7 +23,7 @@ public class ViewDirector extends javax.swing.JFrame {
     private JButton viewDDeleteButton;
     private TextFieldValidations validations = new TextFieldValidations();
     private CRUDDirector crudDirector = new CRUDDirector();
-    Logger LOGGER = Logger.getLogger(ViewDirector.class.getName());
+    private Logger LOGGER = Logger.getLogger(ViewDirector.class.getName());
 
     public ViewDirector(Director director) {
 
@@ -101,7 +101,7 @@ public class ViewDirector extends javax.swing.JFrame {
             }
         });
 
-        validateDirector(viewDName,viewDBirthday,viewDActiveYears,viewDFavGenre);
+        validateDirector(viewDName, viewDBirthday, viewDActiveYears, viewDFavGenre);
     }
 
     public void nationalityJComboB(JComboBox nationalityIn) {
