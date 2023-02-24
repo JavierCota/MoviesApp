@@ -181,8 +181,8 @@ public class MainView extends javax.swing.JFrame {
                 } else {
                     String search = nameSearch.getText();
                     LOGGER.info("Searching for " + searchSelection.getSelectedItem() + " " + search + ".");
-                    if (searchSelection.getSelectedItem().equals("Movie")) {
-                        com.moviesapp.model.internal.Movie movie = null;
+                    if (searchSelection.getSelectedIndex()==0) {
+                        com.moviesapp.model.internal.Movie movie;
                         try {
                             movie = crudMovie.readMovie(search);
                             if (movie == null) {
@@ -200,8 +200,8 @@ public class MainView extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
-                    if (searchSelection.getSelectedItem().equals("Director")) {
-                        com.moviesapp.model.internal.Director director = null;
+                    if (searchSelection.getSelectedIndex()==1) {
+                        com.moviesapp.model.internal.Director director;
                         try {
                             director = crudDirector.readDirector(search);
                             if (director == null) {
@@ -219,8 +219,8 @@ public class MainView extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Error in system search " + exception.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
-                    if (searchSelection.getSelectedItem().equals("Studio")) {
-                        com.moviesapp.model.internal.Studio studio = null;
+                    if (searchSelection.getSelectedIndex()==2) {
+                        com.moviesapp.model.internal.Studio studio;
                         try {
                             studio = crudStudio.readStudio(search);
                             if (studio == null) {
