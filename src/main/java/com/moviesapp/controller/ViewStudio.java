@@ -52,16 +52,16 @@ public class ViewStudio extends javax.swing.JFrame {
         viewSDeleteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this register?", "Delete register", JOptionPane.YES_NO_OPTION);
+                int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this registered studio?", "Delete register", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
                     LOGGER.info("Attempting to delete " + studio.getStudioName() + " ID: " + studio.getStudioID());
                     try {
                         crudStudio.deleteStudio(studio.getStudioID());
                         LOGGER.info("Studio deleted successfully.");
-                        JOptionPane.showMessageDialog(null, "The register was deleted successfully", "Deleted", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "The studio was deleted successfully", "Deleted", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception exception) {
                         LOGGER.warning(exception.getMessage());
-                        JOptionPane.showMessageDialog(null, "An error occurred while deleting the register " + exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "An error occurred while deleting the studio " + exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
                     MainView objMainView = new MainView();
                     frame.setContentPane(objMainView.getContentPane());
@@ -72,7 +72,7 @@ public class ViewStudio extends javax.swing.JFrame {
         viewSUpdateBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to update this register?", "Update register", JOptionPane.YES_NO_OPTION);
+                int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to update this registered studio?", "Update register", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
                     LOGGER.info("Attempting to update " + studio.getStudioName() + " ID: " + studio.getStudioID());
                     if (viewSName.getText().isEmpty()) {
@@ -88,10 +88,10 @@ public class ViewStudio extends javax.swing.JFrame {
                         try {
                             crudStudio.updateStudio(studio);
                             LOGGER.info("Studio updated successfully.");
-                            JOptionPane.showMessageDialog(null, "Register was updated successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Studio was updated successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
                         } catch (Exception exception) {
                             LOGGER.warning(exception.getMessage());
-                            JOptionPane.showMessageDialog(null, "Register was not updated " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Studio was not updated " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }

@@ -105,10 +105,10 @@ public class MainView extends javax.swing.JFrame {
                     try {
                         crudMovie.createMovie(newMovie);
                         LOGGER.info("Movie " + newMovie.getMovieName() + " created successfully.");
-                        JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Movie registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception exception) {
                         LOGGER.warning(exception.getMessage());
-                        JOptionPane.showMessageDialog(null, "Registration was not completed " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Movie was not registered " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -134,10 +134,10 @@ public class MainView extends javax.swing.JFrame {
                     try {
                         crudDirector.createDirector(newDirector);
                         LOGGER.info("Director " + newDirector.getDirectorName() + " created successfully.");
-                        JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Director registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception exception) {
                         LOGGER.warning(exception.getMessage());
-                        JOptionPane.showMessageDialog(null, "Registration was not completed " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Director was not registered " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -163,10 +163,10 @@ public class MainView extends javax.swing.JFrame {
                     try {
                         crudStudio.createStudio(newStudio);
                         LOGGER.info("Studio " + newStudio.getStudioName() + " created successfully.");
-                        JOptionPane.showMessageDialog(null, "Registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Studio registration was completed successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception exception) {
                         LOGGER.warning(exception.getMessage());
-                        JOptionPane.showMessageDialog(null, "Registration was not completed " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Studio was not registered " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -187,7 +187,7 @@ public class MainView extends javax.swing.JFrame {
                             movie = crudMovie.readMovie(search);
                             if (movie == null) {
                                 LOGGER.warning(search + " was not found.");
-                                JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Movie not found ", "Message", JOptionPane.ERROR_MESSAGE);
                                 nameSearch.setText("");
                             } else {
                                 LOGGER.info(search + " was found. Moving to View" + searchSelection.getSelectedItem() + ".");
@@ -206,7 +206,7 @@ public class MainView extends javax.swing.JFrame {
                             director = crudDirector.readDirector(search);
                             if (director == null) {
                                 LOGGER.warning(search + " was not found.");
-                                JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Director not found ", "Message", JOptionPane.ERROR_MESSAGE);
                                 nameSearch.setText("");
                             } else {
                                 LOGGER.info(search + " was found. Moving to View" + searchSelection.getSelectedItem() + ".");
@@ -225,7 +225,7 @@ public class MainView extends javax.swing.JFrame {
                             studio = crudStudio.readStudio(search);
                             if (studio == null) {
                                 LOGGER.warning(search + " was not found.");
-                                JOptionPane.showMessageDialog(null, "Register not found ", "Message", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Studio not found ", "Message", JOptionPane.ERROR_MESSAGE);
                                 nameSearch.setText("");
                             } else {
                                 LOGGER.info(search + " was found. Moving to View" + searchSelection.getSelectedItem() + ".");

@@ -59,16 +59,16 @@ public class ViewMovie extends javax.swing.JFrame {
         viewMDeleteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this register?", "Delete register", JOptionPane.YES_NO_OPTION);
+                int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this registered movie?", "Delete register", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
                     LOGGER.info("Attempting to delete " + movie.getMovieName() + " ID: " + movie.getMovieID());
                     try {
                         crudMovie.deleteMovie(movie.getMovieID());
                         LOGGER.info("Movie deleted successfully");
-                        JOptionPane.showMessageDialog(null, "The register was deleted successfully", "Deleted", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "The movie was deleted successfully", "Deleted", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception exception) {
                         LOGGER.warning(exception.getMessage());
-                        JOptionPane.showMessageDialog(null, "An error occurred while deleting the register " + exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "An error occurred while deleting the movie " + exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
                     MainView objMainView = new MainView();
                     frame.setContentPane(objMainView.getContentPane());
@@ -80,7 +80,7 @@ public class ViewMovie extends javax.swing.JFrame {
         viewMUpdateBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to update this register?", "Update register", JOptionPane.YES_NO_OPTION);
+                int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to update this registered movie?", "Update register", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
                     LOGGER.info("Attempting to update " + movie.getMovieName() + " ID: " + movie.getMovieID());
                     if (viewMName.getText().isEmpty()) {
@@ -97,10 +97,10 @@ public class ViewMovie extends javax.swing.JFrame {
                         try {
                             crudMovie.updateMovie(movie);
                             LOGGER.info("Movie updated successfully");
-                            JOptionPane.showMessageDialog(null, "Register was updated successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Movie updated successfully", "Message", JOptionPane.INFORMATION_MESSAGE);
                         } catch (Exception exception) {
                             LOGGER.warning(exception.getMessage());
-                            JOptionPane.showMessageDialog(null, "Register was not updated " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Movie was not updated " + exception.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
